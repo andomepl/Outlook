@@ -7,7 +7,6 @@
         AllowsTransparency="True"
         WindowStyle="None"
         Background="Transparent"
-        IsHitTestVisible="False"
         Height="650" 
         Width="800" >
     <WindowChrome.WindowChrome>
@@ -18,10 +17,6 @@
             >
         </WindowChrome>
     </WindowChrome.WindowChrome>
-
-    <Window.Resources>
-
-    </Window.Resources>
 
     <Border   
         BorderBrush="DimGray"
@@ -37,26 +32,85 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="{Binding TopBarHeight}"/>
-                <RowDefinition/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel 
+            <DockPanel 
                 Background="Transparent"
                 Grid.Row="0">
-                <TextBlock 
+                <ToggleButton 
+                    DockPanel.Dock="Left"
+                    BorderThickness="0"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
-                    Text="· · ·" 
+                    Content="· · ·" 
                     Foreground="White"
                     FontSize="20"
-                    Background="Transparent" Margin="10 3"/>
-            </StackPanel>
+                    Background="Transparent" Margin="10 0"/>
+
+                <StackPanel
+                    DockPanel.Dock="Right"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border
+                                            x:Name="border"
+                                            Margin="{TemplateBinding Padding}"
+                                            Background="{TemplateBinding Background}">
+                                            <ContentPresenter/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger SourceName="border" Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="Red"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Button 
+                        Padding="10"
+                        BorderThickness="0">
+                        <Path                           
+                            StrokeThickness="2"
+                            Stroke="White" 
+                            Data="M0,8L16,8" />
+                    </Button>
+                    <Button 
+                        Padding="10"
+                        BorderThickness="0">
+                        <Rectangle
+                            Width="15"
+                            Height="15"
+                            StrokeThickness="2"
+                            Stroke="White"
+                            Fill="{Binding Background,RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                            />
+                    </Button>
+                    <Button
+                        Padding="10"
+                        BorderThickness="0">
+                        <Rectangle 
+                            Width="15" Height="15"
+                            Fill="{StaticResource Close}"/>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
             <Grid Grid.Row="1">
                 <Grid.Resources>
-                    <Style TargetType="{x:Type Border}">
+                    <Style TargetType="Border">
                         <Setter Property="Background" Value="#121212"/>
+                        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
                         <Style.Triggers>
-                            <Trigger Property="Border.IsMouseOver"  Value="True">
-                                <Setter Property="Border.Background" Value="Red"/>
+                            <Trigger Property="IsMouseOver"  Value="True">
+                                <Setter Property="Background" Value="DimGray"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>

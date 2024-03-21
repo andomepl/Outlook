@@ -30,7 +30,7 @@ namespace Outlook.WPF.ViewModels
             }
         }
 
-        private int captionHeight = 20;
+        private int captionHeight = 30;
 
         public int CaptionHeight
         {

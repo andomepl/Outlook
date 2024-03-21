@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace Outlook.WPF.Views
 {
@@ -11,5 +12,6 @@ namespace Outlook.WPF.Views
         {
             InitializeComponent();
         }
+
     }
 }
