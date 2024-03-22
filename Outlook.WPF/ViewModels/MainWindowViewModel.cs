@@ -11,7 +11,7 @@ namespace Outlook.WPF.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        private readonly int resizeBorderThickness = 5;
+        private readonly int resizeBorderThickness = 10;
 
         public int ResizeBorderThickness
         {
@@ -30,7 +30,7 @@ namespace Outlook.WPF.ViewModels
             }
         }
 
-        private int captionHeight = 30;
+        private int captionHeight = 40;
 
         public int CaptionHeight
         {
@@ -42,10 +42,6 @@ namespace Outlook.WPF.ViewModels
         }
 
 
-        public int TopBarHeight
-        {
-            get => CaptionHeight + ResizeBorderThickness;
-        }
 
 
         public MainWindowViewModel()

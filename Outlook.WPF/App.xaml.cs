@@ -1,5 +1,4 @@
-﻿using Outlook.Modules.Mail;
-using Outlook.WPF.Views;
+﻿using Outlook.WPF.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using System.Windows;
@@ -23,10 +22,6 @@ namespace Outlook.WPF
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-
-            moduleCatalog.AddModule<MailModule>();
-
-            base.ConfigureModuleCatalog(moduleCatalog);
         }
     }
 }
