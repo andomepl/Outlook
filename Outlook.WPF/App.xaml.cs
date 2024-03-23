@@ -3,6 +3,9 @@ using Prism.Ioc;
 using Prism.Modularity;
 using System.Windows;
 
+using Outlook.WPF.Infrastructure;
+using HomeModule;
+
 namespace Outlook.WPF
 {
     /// <summary>
@@ -22,6 +25,10 @@ namespace Outlook.WPF
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
+            moduleCatalog.AddModule(typeof(HomeModule.HomeModule));
+
+            moduleCatalog.AddModule(typeof(UserLibraryModule.UserLibraryModule));
+
         }
     }
 }

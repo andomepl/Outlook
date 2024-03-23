@@ -3,13 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://prismlibrary.com/"
         xmlns:local="clr-namespace:Outlook.WPF.Views"
+        xmlns:infra="clr-namespace:Outlook.WPF.Infrastructure;assembly=Outlook.WPF.Infrastructure"
         prism:ViewModelLocator.AutoWireViewModel="True"
+        WindowStartupLocation="CenterScreen"
         Title="{Binding Title}" 
         AllowsTransparency="True"
         WindowStyle="None"
         Background="Transparent"
+        Icon="../Assets/icons/dog.png"
+       
         Height="900" 
         Width="1600" >
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static SystemCommands.CloseWindowCommand}" Executed="CloseCommand" CanExecute="CanCloseCommand"/>
+        <CommandBinding Command="{x:Static SystemCommands.MaximizeWindowCommand}" Executed="MinimizeCommand" CanExecute="CanCloseMinimizeCommand"/>
+    </Window.CommandBindings>
     
     <WindowChrome.WindowChrome>
         <WindowChrome
@@ -22,45 +30,55 @@
     </WindowChrome.WindowChrome>
 
     <Grid>
-        <Grid.Resources>
-            <Style TargetType="Border">
-                <Setter Property="Background" Value="#121212"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="Background" Value="#121212"/>
 
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver"  Value="True">
-                        <Setter Property="Background" Value="DimGray"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-        </Grid.Resources>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="4*"/>
-        </Grid.ColumnDefinitions>
-
-        <Grid Margin="5 0 5 10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="5*"/>
-            </Grid.RowDefinitions>
-
-            <Border 
-                CornerRadius="10">
-                <ContentControl prism:RegionManager.RegionName="HomeAndSearch"/>
-            </Border>
-            <Border 
-                Margin="0 10 0 0"
-                Grid.Row="1"
-                CornerRadius="10">
-            </Border>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"  Value="True">
+                            <Setter Property="Background" Value="DimGray"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Margin="15 0 15 10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Border CornerRadius="10">
+                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.HomeRegion}"/>
+                </Border>
+                <Border 
+                        Margin="0 10 0 0"
+                        Grid.Row="1"
+                        CornerRadius="10">
+                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.UserLibraryRegion}"/>
+                </Border>
+            </Grid>
+            <GridSplitter Grid.Column="1"
+                          ResizeBehavior="PreviousAndNext"
+                          Height="auto"
+                          Width="1" Foreground="White"/>
+            <Grid 
+                Grid.Column="2"
+                Margin="15 0 15 10">
+                <Border CornerRadius="10">
+                </Border>
+            </Grid>
         </Grid>
-        <Grid 
-            Grid.Column="1"
-            Margin="5 0 3 10">
-            <Border 
-                CornerRadius="10">
-            </Border>
-        </Grid>
+        
+        <ContentControl Grid.Row="1" prism:RegionManager.RegionName="{x:Static infra:RegionNames.PlayerRegion}"/>
     </Grid>
 
 

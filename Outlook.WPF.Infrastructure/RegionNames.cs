@@ -9,7 +9,10 @@ namespace Outlook.WPF.Infrastructure
     public static class RegionNames
     {
 
-        public static string MainRegion = "MainRegion";
+        public static string HomeRegion = "HomeRegion";
+        public static string UserLibraryRegion = "UserLibraryRegion";
+
+        public static string PlayerRegion = "PlayerRegion";
 
 
     }
