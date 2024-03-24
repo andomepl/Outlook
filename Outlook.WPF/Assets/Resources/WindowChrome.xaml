@@ -94,6 +94,7 @@
                                             Margin="20 0"/>
 
                                     <StackPanel
+                                            Margin="10 0"
                                             Orientation="Horizontal"
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Right">

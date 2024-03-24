@@ -11,11 +11,17 @@ namespace Outlook.WPF.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        private readonly int resizeBorderThickness = 10;
+        public const int DefaultResizeThickness= 10;
+
+        private int resizeBorderThickness = DefaultResizeThickness;
 
         public int ResizeBorderThickness
         {
             get => resizeBorderThickness;
+            set
+            {
+                SetProperty(ref resizeBorderThickness, value);
+            }
         }
 
 

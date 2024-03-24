@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Outlook.WPF.ViewModels;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Outlook.WPF.Views
@@ -30,11 +31,24 @@ namespace Outlook.WPF.Views
 
             if(this.WindowState == WindowState.Normal)
             {
+                var vm =this.DataContext as MainWindowViewModel;
+
+                if(vm != null)
+                {
+                    vm.ResizeBorderThickness = 0;
+                }
+
                 this.WindowState = WindowState.Maximized;
             }
 
             else if (this.WindowState == WindowState.Maximized)
             {
+                var vm = this.DataContext as MainWindowViewModel;
+
+                if (vm != null)
+                {
+                    vm.ResizeBorderThickness = MainWindowViewModel.DefaultResizeThickness;
+                }
                 this.WindowState = WindowState.Normal;
             }
         }
