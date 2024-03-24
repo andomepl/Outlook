@@ -20,6 +20,7 @@
     <PackageReference Include="Prism.Unity" Version="8.1.97" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Modules\DetailModule\DetailModule.csproj" />
     <ProjectReference Include="..\Modules\HomeModule\HomeModule.csproj" />
     <ProjectReference Include="..\Modules\UserLibraryModule\UserLibraryModule.csproj" />
     <ProjectReference Include="..\Outlook.WPF.Infrastructure\Outlook.WPF.Infrastructure.csproj" />

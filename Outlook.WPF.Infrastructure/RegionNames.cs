@@ -14,6 +14,8 @@ namespace Outlook.WPF.Infrastructure
 
         public static string PlayerRegion = "PlayerRegion";
 
+        public static string DetailRegion = "DetailRegion";
+
 
     }
 }

@@ -7,7 +7,7 @@
         <Setter Property="Height" Value="{Binding CaptionHeight}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
-        <Setter Property="Padding" Value="10 0"/>
+        <Setter Property="Padding" Value="10 10"/>
     </Style>
     <Style x:Key="regularButton" TargetType="Button" BasedOn="{StaticResource BaseInterfaceButton}">
         <Setter Property="Template">
@@ -53,6 +53,10 @@
     </Style>
 
 
+    <Geometry x:Key="settingicon">
+        M7,22H9V24H7V22M11,22H13V24H11V22M15,22H17V24H15V22Z
+    </Geometry>
+    
     <Style TargetType="{x:Type local:MainWindow}">
         <Setter Property="Template">
             <Setter.Value>
@@ -82,7 +86,7 @@
                                         LastChildFill="True"
                                         Background="Transparent"
                                         Grid.Row="0">
-                                    <ToggleButton 
+                                    <!--<ToggleButton 
                                             DockPanel.Dock="Left"
                                             BorderThickness="0"
                                             VerticalAlignment="Center"
@@ -91,35 +95,30 @@
                                             Foreground="White"
                                             Background="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type DockPanel}}}"
                                             FontSize="20"
-                                            Margin="20 0"/>
+                                            Margin="20 0"/>-->
+                                    <Path Margin="20 0" Fill="White" DockPanel.Dock="Left" Data="{StaticResource settingicon}"/>
 
                                     <StackPanel
-                                            Margin="10 0"
+                                            Margin="0 0"
                                             Orientation="Horizontal"
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Right">
                                         <Button 
                                                 Style="{StaticResource regularButton}" 
                                                 BorderThickness="0">
-                                            <Path StrokeThickness="2" Stroke="White" Data="M0,5L16,5"/>
+                                            <Path Margin="0 0 5 5" Fill="White" Data="M20 14H4V10H20"/>
                                         </Button>
                                         <Button 
                                                 Command="{x:Static SystemCommands.MaximizeWindowCommand}"
                                                 Style="{StaticResource regularButton}"
                                                 BorderThickness="0">
-                                            <Rectangle  Width="15"
-                                                        Height="15"
-                                                        StrokeThickness="2"
-                                                        Stroke="White"
-                                                        Fill="{Binding Background,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                                            <Path Margin="0 0 2 2" Fill="White" Data="M4,6V19H20V6H4Z"/>
                                         </Button>
                                         <Button
                                                 Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"
                                                 Style="{StaticResource CloseButton}"
                                                 BorderThickness="0">
-                                            <Rectangle  Width="15" 
-                                                        Height="15"
-                                                        Fill="{StaticResource Close}"/>
+                                            <Path Margin="0 0 2 1" Fill="White" Data="M20 6.91L17.09 4L12 9.09L6.91 4L4 6.91L9.09 12L4 17.09L6.91 20L12 14.91L17.09 20L20 17.09L14.91 12L20 6.91Z"/>
                                         </Button>
                                     </StackPanel>
                                 </DockPanel>

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HomeModule.Views
+namespace DetailModule.Views
 {
     /// <summary>
-    /// Interaction logic for ViewA.xaml
+    /// Interaction logic for SearchDetail.xaml
     /// </summary>
-    public partial class ViewA : UserControl
+    public partial class SearchDetail : UserControl
     {
-        public ViewA()
+        public SearchDetail()
         {
             InitializeComponent();
         }

@@ -1,0 +1,193 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:uc="clr-namespace:DetailModule.Controls"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    
+    <Geometry x:Key="search">
+        M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z
+    </Geometry>
+    <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
+    <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+    <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+    <Style x:Key="FocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
+    
+    <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+    <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+    <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+    <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+    <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+    <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+    <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+    <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+    <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+
+    <Style x:Key="searchTextCloseBtn" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefaulted" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="PlaceHolderTextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="AllowDrop" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border 
+                            CornerRadius="20" 
+                            x:Name="border" 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            SnapsToDevicePixels="True">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Margin="5 0" VerticalAlignment="Center" Data="{StaticResource search}" Fill="WhiteSmoke"/>
+                            <ScrollViewer 
+                                    Width="120"
+                                    Background="{TemplateBinding Background}" 
+                                    Margin="3 3"
+                                    x:Name="PART_ContentHost" 
+                                    Focusable="false" 
+                                    HorizontalScrollBarVisibility="Hidden" 
+                                    VerticalScrollBarVisibility="Hidden"/>
+                            <Button
+                                    x:Name="closebtn"
+                                    Style="{StaticResource searchTextCloseBtn}"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Background="{x:Null}"
+                                    BorderThickness="0" 
+                                    Visibility="Hidden">
+                                <Path
+                                    Margin="5 0 5 4"
+                                    Fill="White" 
+                                    Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Visibility" TargetName="closebtn" Value="Visible"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="gray"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="White"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                    <Condition Property="IsSelectionActive" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="SelectionBrush" Value="DeepSkyBlue"/>
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+
+
+
+
+    <Style TargetType="{x:Type uc:MessageButton}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Background" Value="#242424"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Margin" Value="25 0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type uc:MessageButton}">
+                    <Border 
+                        CornerRadius="30" 
+                        x:Name="border" 
+                        Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        SnapsToDevicePixels="true">
+                        <Ellipse Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Ellipse.Fill>
+                                <ImageBrush        
+                                    Viewport="0,0,1,1"
+                                    ViewportUnits="RelativeToBoundingBox" 
+                                    Stretch="Uniform" 
+                                    ImageSource="{Binding ImageBtnSource,RelativeSource={RelativeSource TemplatedParent}}"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <!--<ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>-->
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefaulted" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="gray"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="white"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                            <!--<Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>-->
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

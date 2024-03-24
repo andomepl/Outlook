@@ -9,15 +9,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{FF3A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{3E31E37F-1AD8-4F7F-A6DF-3FF213D4E69F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Outlook.Services.Test", "Services\Outlook.Services.Test\Outlook.Services.Test.csproj", "{7AFCDC7F-4BB0-4FBF-9D48-7FA1705D92CB}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Outlook.WPF.Infrastructure", "Outlook.WPF.Infrastructure\Outlook.WPF.Infrastructure.csproj", "{9594825E-0C86-4782-839A-228002056C88}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeModule", "Modules\HomeModule\HomeModule.csproj", "{A7E093E0-A305-44A7-8F0A-ACC8CC52B545}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserLibraryModule", "Modules\UserLibraryModule\UserLibraryModule.csproj", "{12438D14-FA0F-4738-83CE-CB0109813326}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Outlook.WPF.SpotifyAPI", "Services\Outlook.WPF.SpotifyAPI\Outlook.WPF.SpotifyAPI.csproj", "{6881531E-458D-4761-8826-F6E29D5255B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Outlook.WPF.SpotifyAPI", "Services\Outlook.WPF.SpotifyAPI\Outlook.WPF.SpotifyAPI.csproj", "{6881531E-458D-4761-8826-F6E29D5255B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DetailModule", "Modules\DetailModule\DetailModule.csproj", "{8D105B58-EC60-44A7-9AEB-E01DF8D514BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,6 @@ Global
 		{5D18ABA9-60F8-40D2-8A4E-4958B8D58557}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D18ABA9-60F8-40D2-8A4E-4958B8D58557}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D18ABA9-60F8-40D2-8A4E-4958B8D58557}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7AFCDC7F-4BB0-4FBF-9D48-7FA1705D92CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7AFCDC7F-4BB0-4FBF-9D48-7FA1705D92CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7AFCDC7F-4BB0-4FBF-9D48-7FA1705D92CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7AFCDC7F-4BB0-4FBF-9D48-7FA1705D92CB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9594825E-0C86-4782-839A-228002056C88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9594825E-0C86-4782-839A-228002056C88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9594825E-0C86-4782-839A-228002056C88}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -49,15 +45,19 @@ Global
 		{6881531E-458D-4761-8826-F6E29D5255B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6881531E-458D-4761-8826-F6E29D5255B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6881531E-458D-4761-8826-F6E29D5255B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D105B58-EC60-44A7-9AEB-E01DF8D514BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D105B58-EC60-44A7-9AEB-E01DF8D514BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D105B58-EC60-44A7-9AEB-E01DF8D514BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D105B58-EC60-44A7-9AEB-E01DF8D514BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{7AFCDC7F-4BB0-4FBF-9D48-7FA1705D92CB} = {3E31E37F-1AD8-4F7F-A6DF-3FF213D4E69F}
 		{A7E093E0-A305-44A7-8F0A-ACC8CC52B545} = {FF3A335D-878A-496E-8210-2C8080B0ED2A}
 		{12438D14-FA0F-4738-83CE-CB0109813326} = {FF3A335D-878A-496E-8210-2C8080B0ED2A}
 		{6881531E-458D-4761-8826-F6E29D5255B4} = {3E31E37F-1AD8-4F7F-A6DF-3FF213D4E69F}
+		{8D105B58-EC60-44A7-9AEB-E01DF8D514BE} = {FF3A335D-878A-496E-8210-2C8080B0ED2A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A6DBD89F-2E11-4172-B9DC-C54149BC2BB7}

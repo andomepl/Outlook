@@ -1,23 +1,21 @@
-﻿using HomeModule.Views;
+﻿using DetailModule.Views;
 using Outlook.WPF.Infrastructure;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 
-namespace HomeModule
+namespace DetailModule
 {
-    public class HomeModule : IModule
+    public class DetailModuleModule : IModule
     {
         private readonly IRegionManager _regionManager;
-        public HomeModule(IRegionManager regionManager)
+        public DetailModuleModule(IRegionManager regionManager)
         {
             _regionManager = regionManager;
         }
-
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            _regionManager.RegisterViewWithRegion(RegionNames.HomeRegion, typeof(home));
-            
+            _regionManager.RegisterViewWithRegion(RegionNames.DetailRegion, typeof(SearchDetail));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

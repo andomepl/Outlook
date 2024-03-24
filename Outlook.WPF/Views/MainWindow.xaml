@@ -12,8 +12,8 @@
         Background="Transparent"
         Icon="../Assets/icons/dog.png"
        
-        Height="900" 
-        Width="1600" >
+        Height="920" 
+        Width="1080" >
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static SystemCommands.CloseWindowCommand}" Executed="CloseCommand" CanExecute="CanCloseCommand"/>
         <CommandBinding Command="{x:Static SystemCommands.MaximizeWindowCommand}" Executed="MinimizeCommand" CanExecute="CanCloseMinimizeCommand"/>
@@ -49,9 +49,9 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <Grid Margin="15 0 15 10">
+            <Grid Margin="15 0 5 10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="5*"/>
@@ -69,11 +69,13 @@
             <GridSplitter Grid.Column="1"
                           ResizeBehavior="PreviousAndNext"
                           Height="auto"
-                          Width="1" Foreground="White"/>
+                          Margin="0 30"
+                          Width="3" Foreground="DarkGray"/>
             <Grid 
                 Grid.Column="2"
-                Margin="15 0 15 10">
+                Margin="5 0 15 10">
                 <Border CornerRadius="10">
+                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.DetailRegion}"/>
                 </Border>
             </Grid>
         </Grid>
