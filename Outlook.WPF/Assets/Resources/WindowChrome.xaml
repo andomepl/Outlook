@@ -71,10 +71,6 @@
                                 BorderThickness="1"
                                 CornerRadius="{Binding CornerRadius}">
                             <Border.Background>
-                                <!--<LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
-                                        <GradientStop Color="#A8EB12" Offset="1"/>
-                                        <GradientStop Color="#051937" Offset="0"/>
-                                    </LinearGradientBrush>-->
                                 <SolidColorBrush Color="Black" Opacity="1"/>
                             </Border.Background>
                             <Grid>

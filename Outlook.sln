@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserLibraryModule", "Module
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Outlook.WPF.SpotifyAPI", "Services\Outlook.WPF.SpotifyAPI\Outlook.WPF.SpotifyAPI.csproj", "{6881531E-458D-4761-8826-F6E29D5255B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DetailModule", "Modules\DetailModule\DetailModule.csproj", "{8D105B58-EC60-44A7-9AEB-E01DF8D514BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DetailModule", "Modules\DetailModule\DetailModule.csproj", "{8D105B58-EC60-44A7-9AEB-E01DF8D514BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiTest", "Services\ApiTest\ApiTest.csproj", "{84C853BF-CDDC-4FA0-A8D2-60897F64167C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{8D105B58-EC60-44A7-9AEB-E01DF8D514BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D105B58-EC60-44A7-9AEB-E01DF8D514BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D105B58-EC60-44A7-9AEB-E01DF8D514BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84C853BF-CDDC-4FA0-A8D2-60897F64167C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84C853BF-CDDC-4FA0-A8D2-60897F64167C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84C853BF-CDDC-4FA0-A8D2-60897F64167C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84C853BF-CDDC-4FA0-A8D2-60897F64167C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 		{12438D14-FA0F-4738-83CE-CB0109813326} = {FF3A335D-878A-496E-8210-2C8080B0ED2A}
 		{6881531E-458D-4761-8826-F6E29D5255B4} = {3E31E37F-1AD8-4F7F-A6DF-3FF213D4E69F}
 		{8D105B58-EC60-44A7-9AEB-E01DF8D514BE} = {FF3A335D-878A-496E-8210-2C8080B0ED2A}
+		{84C853BF-CDDC-4FA0-A8D2-60897F64167C} = {3E31E37F-1AD8-4F7F-A6DF-3FF213D4E69F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A6DBD89F-2E11-4172-B9DC-C54149BC2BB7}

@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:uc="clr-namespace:DetailModule.Controls"
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 
@@ -32,6 +33,39 @@
     <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
     <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
 
+
+    <Style x:Key="DisplaySearchInfoBtn" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border CornerRadius="20" x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefaulted" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="dimgray"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <Style x:Key="searchTextCloseBtn" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
@@ -73,6 +107,7 @@
         <Setter Property="AllowDrop" Value="true"/>
         <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="FontWeight" Value="DemiBold"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
@@ -83,30 +118,47 @@
                             BorderBrush="{TemplateBinding BorderBrush}" 
                             BorderThickness="{TemplateBinding BorderThickness}" 
                             SnapsToDevicePixels="True">
-                        <StackPanel Orientation="Horizontal">
-                            <Path Margin="5 0" VerticalAlignment="Center" Data="{StaticResource search}" Fill="WhiteSmoke"/>
-                            <ScrollViewer 
-                                    Width="120"
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Path Grid.Column="0" Margin="5 0" VerticalAlignment="Center" Data="{StaticResource search}" Fill="WhiteSmoke"/>
+                            <Grid Grid.Column="1">
+                                <ScrollViewer 
                                     Background="{TemplateBinding Background}" 
                                     Margin="3 3"
                                     x:Name="PART_ContentHost" 
                                     Focusable="false" 
-                                    HorizontalScrollBarVisibility="Hidden" 
-                                    VerticalScrollBarVisibility="Hidden"/>
+                                    HorizontalScrollBarVisibility="Disabled" 
+                                    VerticalScrollBarVisibility="Disabled"/>
+                                <TextBlock x:Name="placeHolderTextBlock" 
+                                           Margin="5 3"
+                                           Text="what do you wanna play?"
+                                           Background="{x:Null}"
+                                           Foreground="#687275" 
+                                           FontSize="{TemplateBinding FontSize}"
+                                           FontFamily="{TemplateBinding FontFamily}"
+                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                           Visibility="Collapsed"/>
+                            </Grid>
                             <Button
+                                    Command="{Binding ClearSearchCommand}"
+                                    Grid.Column="2"
                                     x:Name="closebtn"
                                     Style="{StaticResource searchTextCloseBtn}"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Background="{x:Null}"
                                     BorderThickness="0" 
-                                    Visibility="Hidden">
+                                    Visibility="Collapsed">
                                 <Path
-                                    Margin="5 0 5 4"
+                                    Margin="0 0 5 4"
                                     Fill="White" 
                                     Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
                             </Button>
-                        </StackPanel>
+                        </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
@@ -115,9 +167,16 @@
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Visibility" TargetName="closebtn" Value="Visible"/>
                             <Setter Property="BorderBrush" TargetName="border" Value="gray"/>
+                            <Setter Property="Cursor" Value="IBeam"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="true">
                             <Setter Property="BorderBrush" TargetName="border" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="Text" Value="">
+                            <Setter Property="Visibility" TargetName="placeHolderTextBlock" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Visibility" TargetName="placeHolderTextBlock" Value="Visible"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -133,9 +192,6 @@
             </MultiTrigger>
         </Style.Triggers>
     </Style>
-
-
-
 
     <Style TargetType="{x:Type uc:MessageButton}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
@@ -190,4 +246,6 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+
 </ResourceDictionary>

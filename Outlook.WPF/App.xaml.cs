@@ -13,6 +13,12 @@ namespace Outlook.WPF
     /// </summary>
     public partial class App
     {
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+        }
+
         protected override Window CreateShell()
         {
             return Container.Resolve<MainWindow>();

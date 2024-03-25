@@ -25,4 +25,7 @@
     <ProjectReference Include="..\Modules\UserLibraryModule\UserLibraryModule.csproj" />
     <ProjectReference Include="..\Outlook.WPF.Infrastructure\Outlook.WPF.Infrastructure.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
+  </ItemGroup>
 </Project>
