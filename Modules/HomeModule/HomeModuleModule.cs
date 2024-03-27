@@ -20,6 +20,7 @@ namespace HomeModule
             
         }
 
+
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
 

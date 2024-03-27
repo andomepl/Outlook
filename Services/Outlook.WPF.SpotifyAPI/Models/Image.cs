@@ -13,7 +13,7 @@ namespace Outlook.WPF.SpotifyAPI.Models
         [JsonProperty("height")]
         public int Height { get; set; }
 
-        [JsonProperty("height")]
+        [JsonProperty("width")]
         public int Width { get; set; }
 
         [JsonProperty("url")]

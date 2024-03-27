@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Outlook.WPF.SpotifyAPI.ApiServices.Albums
+namespace Outlook.WPF.SpotifyAPI.Network
 {
-    public interface IAlbum
+    public interface ICRUD
     {
 
-        
-
+        Task<T> Get<T>(Uri uri, CancellationToken cancelToken);
 
 
     }

@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:DetailModule.ViewModels" >
+
+    <Style x:Key="FlexButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border CornerRadius="10" Width="100" Height="100" Background="MediumPurple">
+                        <TextBlock Text="{Binding MusicTypeName}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
+    <DataTemplate x:Key="ListflexTemplate" DataType="{x:Type vm:MusicTypeFlex}">
+        <Button Style="{StaticResource FlexButton}"></Button>
+    </DataTemplate>
+    
+</ResourceDictionary>

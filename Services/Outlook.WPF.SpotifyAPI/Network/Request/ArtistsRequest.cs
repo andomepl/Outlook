@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Outlook.WPF.SpotifyAPI
+namespace Outlook.WPF.SpotifyAPI.Network.Request
 {
-    public class ApiClient
+    public class ArtistsRequest
     {
-
 
 
     }

@@ -7,6 +7,7 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:uc="clr-namespace:DetailModule.Controls"
              xmlns:prism="http://prismlibrary.com/"
+             xmlns:contracts="clr-namespace:Outlook.WPF.Infrastructure.WPF.Contract.ViewModels;assembly=Outlook.WPF.Infrastructure"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="500">
@@ -56,7 +57,7 @@
                     Orientation="Horizontal" Grid.Column="1">
                     <uc:MessageButton  
                         Margin="10 0"
-                            ImageBtnSource="{Binding ProfilPngPath}">
+                            ImageBtnSource="{Binding AccountGroupPngPath}">
                     </uc:MessageButton>
                     <uc:MessageButton
                         Margin="10 0"
@@ -97,8 +98,22 @@
                                 </StackPanel>
                             </Button>
                         </StackPanel>
+                        <StackPanel Grid.Row="1" Background="{x:Null}">
+                            <Label 
+                                Content="Songs" 
+                                Margin="10 0 3 5" 
+                                FontWeight="Bold" 
+                                FontSize="15" 
+                                Foreground="White"/>
+                            <ListView Margin="10 0 3 5" ItemsSource="{Binding Songs}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type contracts:Songs}">
+                                        <TextBlock Text="{Binding SongDuration}"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
                     </Grid>
-
                 </ScrollViewer>
             </Border>
         </Grid>

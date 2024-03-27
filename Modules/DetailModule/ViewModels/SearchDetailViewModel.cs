@@ -1,5 +1,7 @@
-﻿using Prism.Commands;
+﻿using Outlook.WPF.Infrastructure.WPF.Contract.ViewModels;
+using Prism.Commands;
 using Prism.Mvvm;
+using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,7 @@ using System.Windows.Input;
 
 namespace DetailModule.ViewModels
 {
-    public class SearchDetailViewModel:BindableBase
+    public class SearchDetailViewModel:BindableBase,INavigationAware
     {
 
         private string fullSearchText = String.Empty;
@@ -35,12 +37,49 @@ namespace DetailModule.ViewModels
 
         }
 
+        private string accountGroupPngPath = Outlook.WPF.Infrastructure.UserSettingData.UserDataPath + "/account-Group.png";
+
+        public string AccountGroupPngPath
+        {
+            get => accountGroupPngPath;
+
+        }
+
+
+
         public ICommand ClearSearchCommand { get; }
 
 
         public SearchDetailViewModel()
         {
             ClearSearchCommand = new DelegateCommand(ClearSearch);
+
+            songs=new List<Songs>() {
+                    new Songs()
+                    {
+                        AlbumName="Test",
+                        Image="Test",
+                        ArtistName="Test"
+                    },
+                    new Songs()
+                    {
+                        AlbumName = "Test",
+                        Image = "Test",
+                        ArtistName = "Test"
+                    },
+                    new Songs()
+                    {
+                        AlbumName = "Test",
+                        Image = "Test",
+                        ArtistName = "Test"
+                    },
+                    new Songs()
+                    {
+                        AlbumName = "Test",
+                        Image = "Test",
+                        ArtistName = "Test"
+                    }
+                };
         }
 
         private void ClearSearch()
@@ -49,6 +88,15 @@ namespace DetailModule.ViewModels
         }
 
         private DateTime previousTime = DateTime.Now;
+
+
+        private List<Songs> songs;
+        public IEnumerable<Songs> Songs { get=>songs; }
+
+
+
+
+
 
         public void DisMessage()
         {
@@ -63,6 +111,19 @@ namespace DetailModule.ViewModels
 
         }
 
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
 
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+
+        }
     }
 }
