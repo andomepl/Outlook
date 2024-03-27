@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Outlook.WPF.SpotifyAPI.ApiServices.Artists;
+using Outlook.WPF.SpotifyAPI.ApiServices.SearchItem;
 using Outlook.WPF.SpotifyAPI.Network;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace Outlook.WPF.SpotifyAPI.ApiServices
 
             services.AddSingleton<ApiClient>();
             services.AddSingleton<IArtistsApi, ArtistsApi>();
+
+            services.AddSingleton<ISearchItemApi, SearchItemApi>();
 
             return services;
         }

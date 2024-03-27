@@ -1,4 +1,8 @@
-﻿using Outlook.WPF.Infrastructure.WPF.Contract.ViewModels;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Outlook.WPF.Infrastructure;
+using Outlook.WPF.Infrastructure.WPF.Contract.ViewModels;
+using Outlook.WPF.SpotifyAPI.ApiServices.Artists;
+using Outlook.WPF.SpotifyAPI.Models;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -10,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace DetailModule.ViewModels
 {
@@ -34,6 +39,10 @@ namespace DetailModule.ViewModels
         public string ProfilPngPath
         {
             get => profilePngPath;
+            set
+            {
+                SetProperty(ref profilePngPath,value);
+            }
 
         }
 
@@ -52,6 +61,27 @@ namespace DetailModule.ViewModels
 
         public SearchDetailViewModel()
         {
+
+
+
+            //Task.Run(
+            //    async () =>
+            //    {
+            //        var s = DependencyInjection.serviceProvider.GetService<IArtistsApi>();
+
+            //        // 孙燕姿 =0SIXZXJCAhNU8sxK0qm7hn
+
+            //        var fullart =await s.GetArtist("0SIXZXJCAhNU8sxK0qm7hn");
+
+            //        Dispatcher.CurrentDispatcher.Invoke(() =>
+            //        {
+            //            ProfilPngPath = fullart.Images[1].Url;
+            //        });
+                    
+            //    }
+            //);
+
+
             ClearSearchCommand = new DelegateCommand(ClearSearch);
 
             songs=new List<Songs>() {

@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 
 namespace Outlook.WPF.SpotifyAPI.Models
 {
-    public class SimplifiedArtist
+    public class PlaylistOwner
     {
         [JsonProperty("external_urls")]
         public Dictionary<string, string> ExternalUrls { get; set; } = default!;
+
+        [JsonProperty("followers")]
+        public Followers Followers { get; set; } = default!;
 
         [JsonProperty("href")]
         public string Href { get; set; } = default!;
@@ -18,14 +21,16 @@ namespace Outlook.WPF.SpotifyAPI.Models
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
-        [JsonProperty("name")]
-        public string Name { get; set; } = default!;
-
         [JsonProperty("type")]
         public string Type { get; set; } = default!;
 
         [JsonProperty("uri")]
         public string Uri { get; set; } = default!;
+
+        [JsonProperty("display_name")]
+        public string DisplayName { get; set; } = default!;
+
+
 
     }
 }

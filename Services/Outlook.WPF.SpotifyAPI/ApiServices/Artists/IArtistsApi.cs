@@ -12,7 +12,7 @@ namespace Outlook.WPF.SpotifyAPI.ApiServices.Artists
     {
 
 
-        Task<FullArtist> GetArtist(string id);
+        Task<FullArtist> GetArtist(string name);
 
         //Task<ArtistsResponse> GetSeveralArtists();
 

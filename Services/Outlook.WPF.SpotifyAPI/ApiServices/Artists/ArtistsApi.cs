@@ -16,6 +16,7 @@ namespace Outlook.WPF.SpotifyAPI.ApiServices.Artists
 
         }
 
+
         public async Task<FullArtist> GetArtist(string id)
         {
 

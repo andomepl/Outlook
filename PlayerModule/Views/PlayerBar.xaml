@@ -1,0 +1,9 @@
+﻿<UserControl x:Class="PlayerModule.Views.PlayerBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <!--<MediaElement Source="https://p.scdn.co/mp3-preview/d1f363b951021e5bfcf086ca8d46ed7209206135?cid=8bfa834ef91549a58f4dbfdb521cf347"/>-->
+    </Grid>
+</UserControl>

@@ -1,21 +1,19 @@
 ﻿using Newtonsoft.Json;
-using Outlook.WPF.SpotifyAPI.Util.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace Outlook.WPF.SpotifyAPI.Models
 {
-    public class FullAlbum
+    public class SimpleAlbum
     {
 
         [JsonProperty("album_type")]
         public string AlbumType { get; set; } = default!;
 
-        
+
         [JsonProperty("total_tracks")]
         public int TotalTracks { get; set; }
 
@@ -35,7 +33,7 @@ namespace Outlook.WPF.SpotifyAPI.Models
 
 
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public string Id { get; set; } = default!;
 
 
         [JsonProperty("images")]
@@ -67,27 +65,5 @@ namespace Outlook.WPF.SpotifyAPI.Models
 
         [JsonProperty("artists")]
         public List<SimpleArtist> Artists { get; set; } = default!;
-
-        [JsonProperty("tracks")]
-        public Paging<SimpleTrack> Tracks { get; set; } = default!;
-
-
-        [JsonProperty("copyrights")]
-        public List<Copyright> Copyrights { get; set; } = default!;
-
-        [JsonProperty("external_ids")]
-        public Dictionary<string, string> ExternalIds { get; set; } = default!;
-
-        [JsonProperty("genres")]
-        public List<string> Genres { get; set; } = default!;
-
-        [JsonProperty("label")]
-        public string Label { get; set; } = default!;
-
-        [JsonProperty("popularity")]
-        public int Popularity { get; set; } = default!;
-
-
-
     }
 }

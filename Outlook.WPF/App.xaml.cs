@@ -5,6 +5,8 @@ using System.Windows;
 
 using Outlook.WPF.Infrastructure;
 using HomeModule;
+using Microsoft.Extensions.DependencyInjection;
+using Outlook.WPF.SpotifyAPI.ApiServices;
 
 namespace Outlook.WPF
 {
@@ -17,6 +19,7 @@ namespace Outlook.WPF
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
         }
 
         protected override Window CreateShell()

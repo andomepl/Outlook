@@ -18,7 +18,5 @@ namespace Outlook.WPF.SpotifyAPI.ApiServices
             Client = apiClient;
         }
 
-
-
     }
 }

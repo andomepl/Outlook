@@ -10,26 +10,26 @@ namespace Outlook.WPF.SpotifyAPI.Models
     public class SimpleArtist
     {
         [JsonProperty("external_urls")]
-        public Dictionary<string, string> ExternalUrls { get; set; }
+        public Dictionary<string, string> ExternalUrls { get; set; }=default!;
 
 
         [JsonProperty("href")]
-        public string Href { get; set; }
+        public string Href { get; set; }=default!;
 
 
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public string Id { get; set; }=default!;
 
 
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; }=default!;
 
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public string Type { get; set; }=default!;
 
 
         [JsonProperty("uri")]
-        public string Uri { get; set; }
+        public string Uri { get; set; }=default!;
 
     }
 }
