@@ -11,7 +11,7 @@ namespace Outlook.WPF.SpotifyAPI.ApiServices.SearchItem
     public interface ISearchItemApi
     {
 
-        Task<SearchResponse> Search(SearchRequest s);
+        Task<SearchResponse?> Search(SearchRequest s);
 
     }
 }

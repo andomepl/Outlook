@@ -247,5 +247,96 @@
         </Setter>
     </Style>
 
+    <Storyboard x:Key="MouseOverFilterButtonAmplify">
+        <ColorAnimation 
+            To="White"
+            Storyboard.TargetName="bd" 
+            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+            Duration="0:0:0.2"
+            />
+        <ColorAnimation 
+            To="Black"
+            Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)"
+            Duration="0:0:0.2"
+            />
+        <DoubleAnimation 
+            Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+            To="1.1"
+            Duration="0:0:0.1"/>
+        <DoubleAnimation 
+            Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+            To="1.1"
+            Duration="0:0:0.1"/>
+    </Storyboard>
+    <Storyboard x:Key="MouseOverFilterButtonNarrow">
+        <ColorAnimation 
+            To="#212124"
+            Storyboard.TargetName="bd" 
+            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+            Duration="0:0:0.2"
+            />
+        <ColorAnimation 
+            To="White"
+            Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)"
+            Duration="0:0:0.2"
+            />
+        <DoubleAnimation 
+            Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+            To="1.0"
+            Duration="0:0:0.1"/>
+        <DoubleAnimation 
+            Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+            To="1.0"
+            Duration="0:0:0.1"/>
+    </Storyboard>
 
+    <Style x:Key="filterButton" TargetType="ToggleButton">
+        <Setter Property="Background" Value="#212124"/>
+        <Setter Property="Margin" Value="5,5"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="5 5"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <ScaleTransform/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border 
+                            x:Name="bd"
+                            Margin="{TemplateBinding Margin}"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="10" 
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Border.RenderTransform>
+                            <ScaleTransform/>
+                        </Border.RenderTransform>
+                        <ContentPresenter                   
+                            Margin="{TemplateBinding Padding}"
+                            Content="{TemplateBinding Content}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource MouseOverFilterButtonAmplify}"/>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource MouseOverFilterButtonNarrow}"/>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
 </ResourceDictionary>

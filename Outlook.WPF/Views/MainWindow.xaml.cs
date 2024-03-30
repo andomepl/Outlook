@@ -28,6 +28,16 @@ namespace Outlook.WPF.Views
                     vm.ResizeBorderThickness = 0;
                 }
             }
+
+            if (this.WindowState == WindowState.Normal)
+            {
+                var vm = this.DataContext as MainWindowViewModel;
+
+                if (vm != null)
+                {
+                    vm.ResizeBorderThickness = 10;
+                }
+            }
         }
 
         private void CloseCommand(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)

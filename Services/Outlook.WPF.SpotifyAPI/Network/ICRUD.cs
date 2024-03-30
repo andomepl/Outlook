@@ -9,7 +9,7 @@ namespace Outlook.WPF.SpotifyAPI.Network
     public interface ICRUD
     {
 
-        Task<T> Get<T>(Uri uri, CancellationToken cancelToken);
+        Task<T?> Get<T>(Uri uri, CancellationToken cancelToken);
 
 
     }

@@ -6,8 +6,10 @@
              xmlns:local="clr-namespace:UserLibraryModule.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+
+
     <Grid>
-        <ListView 
+        <ListView
             BorderThickness="0"
             Margin="10" 
             Background="Transparent">

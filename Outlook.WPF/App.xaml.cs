@@ -38,6 +38,8 @@ namespace Outlook.WPF
             moduleCatalog.AddModule(typeof(HomeModule.HomeModule));
             moduleCatalog.AddModule(typeof(UserLibraryModule.UserLibraryModule));
             moduleCatalog.AddModule(typeof(DetailModule.DetailModuleModule));
+
+            moduleCatalog.AddModule(typeof(PlayerModule.PlayerModuleModule));
         }
     }
 }

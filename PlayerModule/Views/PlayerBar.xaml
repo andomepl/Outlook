@@ -3,7 +3,73 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <Grid>
-        <!--<MediaElement Source="https://p.scdn.co/mp3-preview/d1f363b951021e5bfcf086ca8d46ed7209206135?cid=8bfa834ef91549a58f4dbfdb521cf347"/>-->
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/PlayerModule;component/Assets/PlayBarResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    
+    <Grid HorizontalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Margin="10 5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle 
+                Margin="5 3"
+                Grid.Column="0"
+                Stroke="{x:Null}" Width="80" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Rectangle.Fill>
+                    <ImageBrush        
+                        Viewport="0,0,1,1"
+                        ViewportUnits="RelativeToBoundingBox" 
+                        Stretch="Uniform" 
+                        ImageSource="pack://application:,,,/PlayerModule;component/Assets/images.jpg"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <StackPanel Margin="5" Grid.Column="1" Orientation="Vertical">
+                <TextBlock Text="我怀念的" FontSize="23" Foreground="White"/>
+                <TextBlock Margin="0 5" Text="孙燕姿" FontSize="22" Foreground="DimGray"/>
+            </StackPanel>
+        </Grid>
+
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel VerticalAlignment="Center" Grid.Row="0" HorizontalAlignment="Center">
+                <ToggleButton RenderTransformOrigin="0.5,0.5" Style="{StaticResource PlayButton}" BorderThickness="0" Background="{x:Null}" Margin="5 5" HorizontalAlignment="Center">
+                    <Path Width="40" Height="40" Stretch="UniformToFill" Fill="White" Data="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/>
+                </ToggleButton>
+            </StackPanel>
+            <Slider Margin="0 -5 0 0" Grid.Row="1" VerticalAlignment="Center"/>
+        </Grid>
+
+        <StackPanel 
+            Width="200"
+            HorizontalAlignment="Right" 
+            Grid.Column="2" Orientation="Horizontal">
+
+            <Button>
+                Hello
+            </Button>
+            <!--<ToggleButton 
+                BorderThickness="0"
+                Width="auto" 
+                Height="auto" 
+                Background="{x:Null}" 
+                Style="{StaticResource PlayListsButton}"/>-->
+        </StackPanel>
     </Grid>
 </UserControl>

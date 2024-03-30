@@ -3,6 +3,7 @@ using Outlook.WPF.SpotifyAPI.Models.Authentication;
 using Outlook.WPF.SpotifyAPI.Network.Auth;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace Outlook.WPF.SpotifyAPI.Network
 
         private Token token;
 
-        public Token? Credential
+        public Token Credential
         {
             get => token;
         }
@@ -37,6 +38,8 @@ namespace Outlook.WPF.SpotifyAPI.Network
                 httpClient.DefaultRequestHeaders.Clear();
                 httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {Credential.AccessToken}");
 
+                //httpClient.Timeout = TimeSpan.FromMilliseconds(5000);
+
             }).Wait();
         }
 
@@ -50,13 +53,24 @@ namespace Outlook.WPF.SpotifyAPI.Network
 
 
 
-        public async Task<T> Get<T>(Uri uri,CancellationToken cancelToken)
+        public async Task<T?> Get<T>(Uri uri,CancellationToken cancelToken)
         {
+            try
+            {
 
-            HttpResponseMessage response=await httpClient.GetAsync(uri,cancelToken);
-            string entity = await response.Content.ReadAsStringAsync();
+                HttpResponseMessage response = await httpClient.GetAsync(uri, cancelToken);
+                string entity = await response.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<T>(entity);
+                return JsonConvert.DeserializeObject<T>(entity);
+            }
+
+            catch(OperationCanceledException e)
+            {
+                Debug.WriteLine("Last Request was canceled "+e.Message);
+            }
+
+            return default(T);
+            
         }
 
 

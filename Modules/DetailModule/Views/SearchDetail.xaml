@@ -19,13 +19,13 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-
+    
 
     <Border Margin="10" Background="{x:Null}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
@@ -34,7 +34,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBox 
-                    Text="{Binding FullsearchText}"
+                    Text="{Binding FullsearchText, UpdateSourceTrigger=PropertyChanged}"   
                     Grid.Column="0"
                     Width="250" 
                     Height="40" 
@@ -46,7 +46,7 @@
                     Background="#242424" 
                     Style="{StaticResource PlaceHolderTextBox}">
                     <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="TextChanged">
+                        <i:EventTrigger EventName="KeyUp">
                             <i:CallMethodAction MethodName="DisMessage" TargetObject="{Binding}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
@@ -61,14 +61,25 @@
                     </uc:MessageButton>
                     <uc:MessageButton
                         Margin="10 0"
-                            ImageBtnSource="{Binding ProfilPngPath}">
+                            ImageBtnSource="{Binding ProfilePngPath}">
                     </uc:MessageButton>
                 </StackPanel>
             </Grid>
 
-
-            <Border Background="{x:Null}" Grid.Row="2" Margin="10">
-                <ScrollViewer Foreground="{x:Null}" Background="{x:Null}">
+            <StackPanel 
+                Grid.Row="1"
+                Orientation="Horizontal">
+                <ToggleButton Command="{Binding }" Style="{StaticResource filterButton}">All</ToggleButton>
+                <ToggleButton Style="{StaticResource filterButton}">Songs</ToggleButton>
+                <ToggleButton Style="{StaticResource filterButton}">Playlists</ToggleButton>
+                <ToggleButton Style="{StaticResource filterButton}">Albums</ToggleButton>
+                <ToggleButton Style="{StaticResource filterButton}">Artists</ToggleButton>
+            </StackPanel>
+            
+            
+            <Border  Background="{x:Null}" Grid.Row="2" Margin="10">
+                <ScrollViewer
+                    Background="{x:Null}" Foreground="{x:Null}">
                     <Grid Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="250"/>
@@ -90,11 +101,11 @@
                                                 Viewport="0,0,1,1"
                                                 ViewportUnits="RelativeToBoundingBox" 
                                                 Stretch="Uniform" 
-                                                ImageSource="{Binding ProfilPngPath}"/>
+                                                ImageSource="{Binding FullSearchResponse.Tracks.ImageUri}"/>
                                         </Ellipse.Fill>
                                     </Ellipse>
-                                    <TextBlock FontSize="20" FontWeight="Bold" Foreground="White" Margin="5 15 3 5" Text="Andomepl"/>
-                                    <TextBlock Margin="5 5" Foreground="DimGray" Text="Artist"/>
+                                    <TextBlock FontSize="20" FontWeight="Bold" Foreground="White" Margin="5 15 3 5" Text="{Binding FullSearchResponse.Tracks.Name}"/>
+                                    <TextBlock Margin="5 5" Foreground="DimGray" Text="{Binding FullSearchResponse.Tracks.DisplayType}"/>
                                 </StackPanel>
                             </Button>
                         </StackPanel>
@@ -105,12 +116,64 @@
                                 FontWeight="Bold" 
                                 FontSize="15" 
                                 Foreground="White"/>
-                            <ListView Margin="10 0 3 5" ItemsSource="{Binding Songs}">
+                            <ListView 
+                                BorderThickness="0"
+                                Background="{x:Null}" 
+                                Margin="10 0 3 5" ItemsSource="{Binding FullSearchResponse.Songs}">
                                 <ListView.ItemTemplate>
-                                    <DataTemplate DataType="{x:Type contracts:Songs}">
-                                        <TextBlock Text="{Binding SongDuration}"/>
+                                    <DataTemplate DataType="{x:Type contracts:TracksModel}">
+                                        <DockPanel 
+                                                Margin="10 5"
+                                                LastChildFill="True">
+                                                <Rectangle 
+                                                    DockPanel.Dock="Left"
+                                                    Stroke="{x:Null}" Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                    <Rectangle.Fill>
+                                                        <ImageBrush        
+                                                            Viewport="0,0,1,1"
+                                                            ViewportUnits="RelativeToBoundingBox" 
+                                                            Stretch="Uniform" 
+                                                            ImageSource="{Binding ImageUri}"/>
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                                <Grid 
+                                                    Margin="10 2 5 2">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*"/>
+                                                        <RowDefinition Height="*"/>
+                                                    </Grid.RowDefinitions>
+                                                    <TextBlock Grid.Row="0" Foreground="White" Text="{Binding Name}"/>
+                                                    <TextBlock Grid.Row="1" Foreground="White" Text="{Binding Artists.Name}"/>
+                                                </Grid>
+                                                <TextBlock 
+                                                    VerticalAlignment="Center"
+                                                    DockPanel.Dock="Right"
+                                                    HorizontalAlignment="Right" Foreground="White" Text="{Binding Duration}"/>
+                                            </DockPanel>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ListViewItem">
+                                                    <Border x:Name="bd" CornerRadius="5">
+                                                        <ContentPresenter/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="bd" Property="Background" Value="#242424"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsSelected" Value="True">
+                                                            <Setter TargetName="bd" Property="Background" Value="#242424"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                                
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
                             </ListView>
                         </StackPanel>
                     </Grid>

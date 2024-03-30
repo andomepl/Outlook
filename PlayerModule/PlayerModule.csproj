@@ -4,9 +4,15 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Assets\images.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Prism.Wpf" Version="8.1.97" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Outlook.WPF.Infrastructure\Outlook.WPF.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\images.jpg" />
   </ItemGroup>
 </Project>

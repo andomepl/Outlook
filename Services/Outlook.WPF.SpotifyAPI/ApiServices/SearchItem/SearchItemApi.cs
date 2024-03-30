@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Outlook.WPF.SpotifyAPI.ApiServices.SearchItem
@@ -19,7 +20,9 @@ namespace Outlook.WPF.SpotifyAPI.ApiServices.SearchItem
         private const string defaultEndpoint =
             "https://api.spotify.com/v1/search?";
 
-        public async Task<SearchResponse> Search(SearchRequest s)
+
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        public async Task<SearchResponse?> Search(SearchRequest s)
         {
             StringBuilder sb=new StringBuilder(defaultEndpoint);
 
@@ -29,9 +32,12 @@ namespace Outlook.WPF.SpotifyAPI.ApiServices.SearchItem
 
             string endpoint = sb.ToString();
 
-            
+            cancellationTokenSource.Cancel();
 
-            return await Client.Get<SearchResponse>(new Uri(endpoint),new CancellationToken());
+            cancellationTokenSource = new CancellationTokenSource();
+            CancellationToken cancellationToken = cancellationTokenSource.Token;
+
+            return await Client.Get<SearchResponse>(new Uri(endpoint), cancellationToken);
 
         }
     }

@@ -25,6 +25,7 @@
     <ProjectReference Include="..\Modules\HomeModule\HomeModule.csproj" />
     <ProjectReference Include="..\Modules\UserLibraryModule\UserLibraryModule.csproj" />
     <ProjectReference Include="..\Outlook.WPF.Infrastructure\Outlook.WPF.Infrastructure.csproj" />
+    <ProjectReference Include="..\PlayerModule\PlayerModule.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
