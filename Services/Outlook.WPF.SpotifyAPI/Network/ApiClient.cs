@@ -67,9 +67,9 @@ namespace Outlook.WPF.SpotifyAPI.Network
             catch(OperationCanceledException e)
             {
                 Debug.WriteLine("Last Request was canceled "+e.Message);
-            }
 
-            return default(T);
+                return default(T);
+            }
             
         }
 

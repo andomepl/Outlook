@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Outlook.WPF.SpotifyAPI.Network.Response
 {
-    public class SearchResponse 
+    public class SearchResponse
     {
         [JsonProperty("tracks")]
         public Paging<FullTrack, SearchResponse> Tracks { get; set; } = default!;
@@ -28,11 +28,6 @@ namespace Outlook.WPF.SpotifyAPI.Network.Response
         [JsonProperty("episodes")]
         public Paging<SimpleEpisode, SearchResponse> Episodes { get; set; } = default!;
 
-
-
-
     }
 
-
-    
 }

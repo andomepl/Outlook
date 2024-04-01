@@ -22,6 +22,7 @@ namespace Outlook.WPF.SpotifyAPI.ApiServices.SearchItem
 
 
         CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
         public async Task<SearchResponse?> Search(SearchRequest s)
         {
             StringBuilder sb=new StringBuilder(defaultEndpoint);
@@ -32,12 +33,12 @@ namespace Outlook.WPF.SpotifyAPI.ApiServices.SearchItem
 
             string endpoint = sb.ToString();
 
-            cancellationTokenSource.Cancel();
 
+            cancellationTokenSource.Cancel();
             cancellationTokenSource = new CancellationTokenSource();
             CancellationToken cancellationToken = cancellationTokenSource.Token;
 
-            return await Client.Get<SearchResponse>(new Uri(endpoint), cancellationToken);
+            return await Client.Get<SearchResponse?>(new Uri(endpoint), cancellationToken);
 
         }
     }

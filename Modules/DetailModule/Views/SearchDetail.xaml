@@ -8,7 +8,9 @@
              xmlns:uc="clr-namespace:DetailModule.Controls"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:contracts="clr-namespace:Outlook.WPF.Infrastructure.WPF.Contract.ViewModels;assembly=Outlook.WPF.Infrastructure"
+             xmlns:qt="clr-namespace:Outlook.WPF.SpotifyAPI.Network;assembly=Outlook.WPF.SpotifyAPI"
              prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:converter="clr-namespace:DetailModule.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="500">
     <UserControl.Resources>
@@ -47,7 +49,7 @@
                     Style="{StaticResource PlaceHolderTextBox}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="KeyUp">
-                            <i:CallMethodAction MethodName="DisMessage" TargetObject="{Binding}"/>
+                            <i:InvokeCommandAction Command="{Binding SearchImplCommand}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBox>
@@ -69,11 +71,59 @@
             <StackPanel 
                 Grid.Row="1"
                 Orientation="Horizontal">
-                <ToggleButton Command="{Binding }" Style="{StaticResource filterButton}">All</ToggleButton>
-                <ToggleButton Style="{StaticResource filterButton}">Songs</ToggleButton>
-                <ToggleButton Style="{StaticResource filterButton}">Playlists</ToggleButton>
-                <ToggleButton Style="{StaticResource filterButton}">Albums</ToggleButton>
-                <ToggleButton Style="{StaticResource filterButton}">Artists</ToggleButton>
+                <StackPanel.Resources>
+                    <converter:FilterToIsChecked x:Key="FilterIsCheckedConverter"/>
+                </StackPanel.Resources>
+                <ToggleButton 
+                    IsChecked="{Binding CurrentFilter,Converter={StaticResource FilterIsCheckedConverter}, ConverterParameter=All}" 
+                    Style="{StaticResource filterButton}" 
+                    Content="All">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <i:InvokeCommandAction Command="{Binding SearchImplCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ToggleButton>
+                <ToggleButton 
+                    IsChecked="{Binding CurrentFilter, Converter={StaticResource FilterIsCheckedConverter}, ConverterParameter=track}"
+                    Style="{StaticResource filterButton}" 
+                    Content="Songs">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <i:InvokeCommandAction Command="{Binding SearchImplCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ToggleButton>
+                <ToggleButton 
+                    IsChecked="{Binding CurrentFilter,Converter={StaticResource FilterIsCheckedConverter}, ConverterParameter=playlist}"
+                    Style="{StaticResource filterButton}" 
+                    Content="Playlists">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <i:InvokeCommandAction Command="{Binding SearchImplCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ToggleButton>
+                <ToggleButton 
+                    IsChecked="{Binding CurrentFilter, Converter={StaticResource FilterIsCheckedConverter}, ConverterParameter=album}"
+                    Style="{StaticResource filterButton}" 
+                    Content="Albums">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <i:InvokeCommandAction Command="{Binding SearchImplCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ToggleButton>
+                <ToggleButton 
+                    IsChecked="{Binding CurrentFilter, Converter={StaticResource FilterIsCheckedConverter}, ConverterParameter=artist}"
+                    Style="{StaticResource filterButton}" 
+                    Content="Artists">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <i:InvokeCommandAction Command="{Binding SearchImplCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ToggleButton>
             </StackPanel>
             
             

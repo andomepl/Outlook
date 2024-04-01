@@ -58,8 +58,6 @@ namespace DetailModule.ViewModels
             set
             {
                 SetProperty(ref fullSearchResponse, value);
-
-                
             }
         }
 
@@ -69,10 +67,6 @@ namespace DetailModule.ViewModels
         {
             get => accountGroupPngPath;
         }
-
-
-        private TimeSpan searchTimeSpan = TimeSpan.FromSeconds(2);
-
 
         IEventAggregator _eventAggregator;
 
@@ -85,6 +79,7 @@ namespace DetailModule.ViewModels
 
             _eventAggregator = eventAggregator;
 
+            SearchImplCommand = new DelegateCommand(SearchRequest);
         }
 
         private void ClearSearch()
@@ -93,69 +88,12 @@ namespace DetailModule.ViewModels
         }
 
         public ICommand SearchSongsCommand { get; }
-        private void SearchSongs()
-        {
-            Task.Run(async () =>
-            {
-
-                SearchRequest searchRequest = new SearchRequest(FullsearchText,QueryType.track);
-
-                var s = DependencyInjection.serviceProvider.GetService<ISearchItemApi>();
-
-                SearchResponse sp = await s.Search(searchRequest);
-
-                if (sp.Tracks == null)
-                    return;
-
-                FullTrack fullTrack = sp.Tracks.Items.First();
-
-                TracksModel track = new TracksModel
-                {
-                    Name = fullTrack.Name,
-                    ImageUri = fullTrack.Album.Images[0].Url,
-                    DisplayType = fullTrack.Type,
-                    Artists = new ArtistsModel
-                    {
-                        Name = fullTrack.Artists.First().Name
-                    }
-
-                };
-
-                var fulltrackSearchTask5 = sp.Tracks.Items.Take(5);
 
 
-                ObservableCollection<TracksModel> Songs = new ObservableCollection<TracksModel>();
 
-                foreach (var specifiedtrack in fulltrackSearchTask5)
-                {
-                    Songs.Add(new TracksModel
-                    {
-                        Name = specifiedtrack.Name,
-                        ImageUri = specifiedtrack.Album.Images[0].Url,
-                        Artists = new ArtistsModel()
-                        {
-                            Name = specifiedtrack.Artists.First().Name
-                        },
-                        Duration = TimeSpan.FromMilliseconds(specifiedtrack.DurationMs).ToString(@"mm\:ss")
-                    });
-                }
+        public DelegateCommand SearchImplCommand { get; }
 
-                FullSearchResponseModel fullSearchResponseModel = new FullSearchResponseModel
-                {
-                    Tracks = track,
-                    Songs = Songs
-                };
-
-                Dispatcher.CurrentDispatcher.Invoke(() =>
-                {
-                    FullSearchResponse = fullSearchResponseModel;
-                });
-
-            });
-        }
-
-
-        public void DisMessage()
+        public void DefaultAllSearch()
         {
 
             Task.Run(async () =>
@@ -219,7 +157,44 @@ namespace DetailModule.ViewModels
 
             });
 
-            
+        }
+
+
+        private string currentFilter = "All";
+
+        public string CurrentFilter
+        {
+            get => currentFilter;
+            set
+            {
+                SetProperty(ref currentFilter, value);
+            }
+        }
+
+        public void SearchRequest()
+        {
+
+            if(CurrentFilter == "All")
+            {
+                DefaultAllSearch();
+            }
+
+            else if(Enum.TryParse(CurrentFilter, out QueryType result))
+            {
+                Task.Run(async () =>
+                {
+
+                    SearchRequest searchRequest = new SearchRequest(FullsearchText, result);
+
+                    var s = DependencyInjection.serviceProvider.GetService<ISearchItemApi>();
+
+                    SearchResponse sp = await s.Search(searchRequest);
+
+                    if (sp == null)
+                        return;
+                });
+            }
+
 
         }
 

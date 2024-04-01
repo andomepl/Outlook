@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DetailModule", "Modules\Det
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTest", "Services\ApiTest\ApiTest.csproj", "{84C853BF-CDDC-4FA0-A8D2-60897F64167C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayerModule", "PlayerModule\PlayerModule.csproj", "{130F19A1-0B49-4704-A1D6-CDC881C2F401}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayerModule", "PlayerModule\PlayerModule.csproj", "{130F19A1-0B49-4704-A1D6-CDC881C2F401}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
