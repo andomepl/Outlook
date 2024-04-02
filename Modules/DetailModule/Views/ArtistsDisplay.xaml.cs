@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace DetailModule.Views
 {
     /// <summary>
-    /// Interaction logic for SearchDetail.xaml
+    /// Interaction logic for ArtistsDisplay.xaml
     /// </summary>
-    public partial class SearchDetail : UserControl
+    public partial class ArtistsDisplay : UserControl
     {
-        public SearchDetail()
+        public ArtistsDisplay()
         {
             InitializeComponent();
         }

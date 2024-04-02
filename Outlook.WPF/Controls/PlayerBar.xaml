@@ -1,0 +1,163 @@
+﻿<UserControl x:Class="Outlook.WPF.Controls.PlayerBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Assets/Resources/PlayBarResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    
+    <Grid HorizontalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Margin="10 5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle 
+                Margin="5 3"
+                Grid.Column="0"
+                Stroke="{x:Null}" Width="80" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Rectangle.Fill>
+                    <ImageBrush        
+                        Viewport="0,0,1,1"
+                        ViewportUnits="RelativeToBoundingBox" 
+                        Stretch="Uniform" 
+                        ImageSource="../Assets/Resources/images.jpg"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <StackPanel Margin="5" Grid.Column="1" Orientation="Vertical">
+                <TextBlock Text="我怀念的" FontSize="23" Foreground="White"/>
+                <TextBlock Margin="0 5" Text="孙燕姿" FontSize="22" Foreground="DimGray"/>
+            </StackPanel>
+        </Grid>
+
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="0" HorizontalAlignment="Center">
+                <Button 
+                    Margin="15 0"
+                    Width="30"
+                    Height="30"
+                    BorderThickness="0" 
+                    Background="Black" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <Path 
+                                                x:Name="path"
+                                                Fill="Gray"
+                                                Data="M6,18V6H8V18H6M9.5,12L18,6V18L9.5,12Z">
+                                                <Path.RenderTransform>
+                                                    <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                                                </Path.RenderTransform>
+                                            </Path>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="path" Property="Fill" Value="white"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+
+                </Button>
+                <ToggleButton RenderTransformOrigin="0.5,0.5" Style="{StaticResource PlayButton}" BorderThickness="0" Background="{x:Null}" Margin="5 5" HorizontalAlignment="Center">
+                    <Path Width="40" Height="40" Stretch="UniformToFill" Fill="White" Data="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/>
+                </ToggleButton>
+                <Button 
+                    Margin="15 0"
+                    Width="30"
+                    Height="30"
+                    BorderThickness="0" 
+                    Background="Black" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <Path 
+                                                x:Name="path"
+                                                Fill="Gray"
+                                                Data="M16,18H18V6H16M6,18L14.5,12L6,6V18Z">
+                                                <Path.RenderTransform>
+                                                    <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                                                </Path.RenderTransform>
+                                            </Path>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="path" Property="Fill" Value="white"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+
+                </Button>
+            </StackPanel>
+            <Slider Grid.Row="1" VerticalAlignment="Center"/>
+        </Grid>
+
+        <Grid 
+            Width="200"
+            Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button 
+                    Style="{StaticResource QueueIcon}"
+                    Width="40"
+                    Height="40"
+                    BorderThickness="0" 
+                    Background="Black" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center">
+            </Button>
+            <Button 
+                Style="{StaticResource NowPlayingViewIcon}"
+                Grid.Column="1"
+                Width="40"
+                Height="40"
+                BorderThickness="0" 
+                Background="Black" 
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+            </Button>
+            <Button 
+                Style="{StaticResource LyricsIcon}"
+                Grid.Column="2"
+                Width="40"
+                Height="40"
+                BorderThickness="0" 
+                Background="Black" 
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>

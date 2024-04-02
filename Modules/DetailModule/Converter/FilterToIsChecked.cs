@@ -32,7 +32,7 @@ namespace DetailModule.Converter
             }
             else
             {
-                throw new Exception("Need a ischecked");
+                return "All";
             }
             
         }

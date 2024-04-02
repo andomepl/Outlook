@@ -7,64 +7,17 @@ using System.Threading.Tasks;
 
 namespace Outlook.WPF.Infrastructure.WPF.Contract.ViewModels
 {
-    public class TracksModel:BindableBase
+    public class TracksModel
     {
+        public string Name { get; set; } = default!;
+  
+        public string ImageUri { get; set; } = default!;
 
-        private string name;
+        public string ArtistName { get; set; } = default!;
 
-        public string Name
-        {
-            get => name;
-            set
-            {
-                SetProperty(ref name, value);
-            }
-        }
+        public string AlbumName { get; set; } = default!;
 
-        private string imageUri;
-
-        public string ImageUri
-        {
-            get => imageUri;
-            set
-            {
-                SetProperty(ref imageUri, value);   
-            }
-        }
-
-        private string displayType;
-
-        public string DisplayType
-        {
-            get => displayType;
-            set
-            {
-                SetProperty(ref displayType, value);
-            }
-        }
-
-        private ArtistsModel artists;
-
-        public ArtistsModel Artists
-        {
-            get => artists;
-            set
-            {
-                SetProperty(ref artists, value);
-            }
-        }
-
-
-        private string duration;
-        
-        public string Duration
-        {
-            get => duration;
-            set
-            {
-                SetProperty(ref duration, value);
-            }
-        }
+        public string Duration { get; set; } = default!;
 
     }
 }

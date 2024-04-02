@@ -8,29 +8,14 @@ using System.Threading.Tasks;
 
 namespace Outlook.WPF.Infrastructure.WPF.Contract.ViewModels
 {
-    public class AlbumModel:BindableBase
+    public class AlbumModel
     {
 
-        private string releaseDate;
-        public string ReleaseDate
-        {
-            get => releaseDate;
-            set
-            {
-                SetProperty(ref releaseDate, value);
-            }
-        }
+        public string? ImageUri { get; set; }
 
-        private string name;
+        public string? ReleaseDate { get; set; }
 
-        public string Name
-        {
-            get => name;
-            set
-            {
-                SetProperty(ref name, value);
-            }
-        }
+        public string? Name { get; set; }
 
 
 

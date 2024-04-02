@@ -1,5 +1,4 @@
 ﻿using Outlook.WPF.Infrastructure;
-using PlayerModule.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
@@ -11,7 +10,7 @@ namespace PlayerModule
         public void OnInitialized(IContainerProvider containerProvider)
         {
 
-            containerProvider.Resolve<IRegionManager>().RegisterViewWithRegion(RegionNames.PlayerRegion,typeof(PlayerBar));
+            //containerProvider.Resolve<IRegionManager>().RegisterViewWithRegion(RegionNames.PlayerRegion,typeof(PlayerBar));
 
         }
 

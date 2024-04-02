@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DetailModule.Services;
+using Microsoft.Extensions.DependencyInjection;
 using Outlook.WPF.Infrastructure;
 using Outlook.WPF.Infrastructure.WPF.Contract.ViewModels;
 using Outlook.WPF.SpotifyAPI.ApiServices.Artists;
@@ -24,7 +25,7 @@ using System.Windows.Threading;
 
 namespace DetailModule.ViewModels
 {
-    public class SearchDetailViewModel:BindableBase,INavigationAware
+    public class AllSearchDetailViewModel:BindableBase,INavigationAware
     {
 
         private string fullSearchText = String.Empty;
@@ -50,14 +51,13 @@ namespace DetailModule.ViewModels
 
         public ICommand ClearSearchCommand { get; }
 
-        private FullSearchResponseModel fullSearchResponse;
-
-        public FullSearchResponseModel FullSearchResponse
+        private AllSeachViewModel allSearchViewModel;
+        public AllSeachViewModel AllSearchViewModel
         {
-            get => fullSearchResponse;
+            get => allSearchViewModel;
             set
             {
-                SetProperty(ref fullSearchResponse, value);
+                SetProperty(ref allSearchViewModel, value);
             }
         }
 
@@ -70,16 +70,19 @@ namespace DetailModule.ViewModels
 
         IEventAggregator _eventAggregator;
 
+        private readonly IGenerateAllSearchViewModel s_generateAllSearchViewModel;
 
-
-        public SearchDetailViewModel(IEventAggregator eventAggregator)
+        public AllSearchDetailViewModel(IEventAggregator eventAggregator, IGenerateAllSearchViewModel generateAllSearchViewModel)
         {
+
 
             ClearSearchCommand = new DelegateCommand(ClearSearch);
 
             _eventAggregator = eventAggregator;
 
             SearchImplCommand = new DelegateCommand(SearchRequest);
+
+            s_generateAllSearchViewModel = generateAllSearchViewModel;
         }
 
         private void ClearSearch()
@@ -90,72 +93,68 @@ namespace DetailModule.ViewModels
         public ICommand SearchSongsCommand { get; }
 
 
-
         public DelegateCommand SearchImplCommand { get; }
 
-        public void DefaultAllSearch()
+        public async void DefaultAllSearch()
         {
 
-            Task.Run(async () =>
-            {
 
-                SearchRequest searchRequest = new SearchRequest(FullsearchText);
+            AllSearchViewModel=await s_generateAllSearchViewModel.GenerateAllSeachAsync(FullsearchText).ConfigureAwait(false);
 
-                var s = DependencyInjection.serviceProvider.GetService<ISearchItemApi>();
+            //Task.Run(async () =>
+            //{
 
-                SearchResponse sp=await s.Search(searchRequest);
+            //    SearchRequest searchRequest = new SearchRequest(FullsearchText);
 
-                if (sp == null)
-                    return;
+            //    var s = DependencyInjection.serviceProvider.GetService<ISearchItemApi>();
 
-                if (sp.Tracks == null)
-                    return;
+            //    SearchResponse sp=await s.Search(searchRequest);
 
-                FullTrack fullTrack= sp.Tracks.Items.First();
+            //    if (sp == null)
+            //        return;
 
-                TracksModel track = new TracksModel
-                {
-                    Name = fullTrack.Name,
-                    ImageUri = fullTrack.Album.Images[0].Url,
-                    DisplayType = fullTrack.Type,
-                    Artists = new ArtistsModel
-                    {
-                        Name = fullTrack.Artists.First().Name
-                    }
+            //    if (sp.Tracks == null)
+            //        return;
 
-                };
-
-                var fulltrackSearchTask5= sp.Tracks.Items.Take(5);
+            //    FullTrack fullTrack= sp.Tracks.Items.First();
 
 
-                ObservableCollection<TracksModel> Songs = new ObservableCollection<TracksModel>();
+            //    TracksModel track = new TracksModel
+            //    {
+            //        Name = fullTrack.Name,
+            //        ImageUri = fullTrack.Album.Images[0].Url,
+            //        ArtistName=fullTrack.Artists.First().Name,
+          
+            //    };
 
-                foreach(var specifiedtrack in fulltrackSearchTask5)
-                {
-                    Songs.Add(new TracksModel
-                    {
-                        Name=specifiedtrack.Name,
-                        ImageUri = specifiedtrack.Album.Images[0].Url,
-                        Artists=new ArtistsModel()
-                        {
-                             Name=specifiedtrack.Artists.First().Name
-                        },
-                        Duration= TimeSpan.FromMilliseconds(specifiedtrack.DurationMs).ToString(@"mm\:ss")
-                    });
-                }
+            //    var fulltrackSearchTask5= sp.Tracks.Items.Take(5);
 
-                FullSearchResponseModel fullSearchResponseModel = new FullSearchResponseModel
-                {
-                    Tracks = track,
-                    Songs = Songs
-                };
 
-                Dispatcher.CurrentDispatcher.Invoke(() =>
-                {
-                    FullSearchResponse = fullSearchResponseModel;
-                });
+            //    ObservableCollection<TracksModel> Songs = new ObservableCollection<TracksModel>();
 
-            });
+            //    foreach(var specifiedtrack in fulltrackSearchTask5)
+            //    {
+            //        Songs.Add(new TracksModel
+            //        {
+            //            Name=specifiedtrack.Name,
+            //            ImageUri = specifiedtrack.Album.Images[0].Url,
+            //            ArtistName = specifiedtrack.Artists.First().Name,
+            //            Duration = TimeSpan.FromMilliseconds(specifiedtrack.DurationMs).ToString(@"mm\:ss")
+            //        });
+            //    }
+
+            //    FullSearchResponseModel fullSearchResponseModel = new FullSearchResponseModel
+            //    {
+            //        Tracks = track,
+            //        Songs = Songs
+            //    };
+
+            //    Dispatcher.CurrentDispatcher.Invoke(() =>
+            //    {
+            //        FullSearchResponse = fullSearchResponseModel;
+            //    });
+
+            //});
 
         }
 
@@ -170,6 +169,8 @@ namespace DetailModule.ViewModels
                 SetProperty(ref currentFilter, value);
             }
         }
+
+
 
         public void SearchRequest()
         {
@@ -200,7 +201,7 @@ namespace DetailModule.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-
+            
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

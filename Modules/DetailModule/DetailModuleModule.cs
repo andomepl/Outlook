@@ -1,4 +1,5 @@
-﻿using DetailModule.Views;
+﻿using DetailModule.Services;
+using DetailModule.Views;
 using Outlook.WPF.Infrastructure;
 using Prism.Ioc;
 using Prism.Modularity;
@@ -15,13 +16,17 @@ namespace DetailModule
         }
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            _regionManager.RegisterViewWithRegion(RegionNames.DetailRegion, typeof(SearchDetail));
+           
+            _regionManager.RegisterViewWithRegion(RegionNames.DetailRegion, typeof(AllSearchDetail));
             _regionManager.RegisterViewWithRegion(RegionNames.DetailRegion, typeof(HomeDetail));
-            _regionManager.RegisterViewWithRegion(RegionNames.DetailRegion, typeof(DefaultSearchView));
+
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+
+            containerRegistry.RegisterSingleton<IGenerateAllSearchViewModel,GenerateAllSearchViewModel>();
+
 
         }
     }

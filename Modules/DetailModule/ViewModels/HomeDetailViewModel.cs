@@ -26,7 +26,6 @@ namespace DetailModule.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-           
         }
     }
 }

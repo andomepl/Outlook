@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace PlayerModule.Views
+namespace Outlook.WPF.Controls
 {
     /// <summary>
     /// Interaction logic for PlayerBar

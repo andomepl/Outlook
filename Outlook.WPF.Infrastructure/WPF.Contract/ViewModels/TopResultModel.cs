@@ -10,27 +10,11 @@ namespace Outlook.WPF.Infrastructure.WPF.Contract.ViewModels
     public class TopResultModel:BindableBase
     {
 
-        private string imageUri;
+        public string ImageUri { get; set; }
 
-        public string ImageUri
-        {
-            get => imageUri;
-            set
-            {
-                SetProperty(ref imageUri, value);
-            }
-        }
-
-        private string name;
-
-        public string Name
-        {
-            get => name;
-            set
-            {
-                SetProperty(ref name, value);
-            }
-        }
+        public string Name { get; set; }
+  
+        private string Type { get; set; }
 
     }
 }

@@ -108,7 +108,7 @@
                                                 Command="{x:Static SystemCommands.MaximizeWindowCommand}"
                                                 Style="{StaticResource regularButton}"
                                                 BorderThickness="0">
-                                            <Path Margin="0 0 2 2" Fill="White" Data="M4,6V19H20V6H4Z"/>
+                                            <Path Margin="0 0 2 0" StrokeThickness="2" Stroke="White" Data="M4,6V19H20V6H4Z"/>
                                         </Button>
                                         <Button
                                                 Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"

@@ -48,7 +48,7 @@
         </Grid.Resources>
         <ToggleButton 
             Command="{Binding NaviHome}"
-            IsChecked="{Binding IsHomeBtnChecked}" Margin="0 20 30 0">
+            IsChecked="{Binding IsHomeBtnChecked}" Margin="20 20 30 0">
             <StackPanel Orientation="Horizontal" Margin="5 3" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Path Stretch="Uniform" Fill="Black" Data="{StaticResource homeicon}"></Path>
                 <TextBlock Text="Home" TextAlignment="Left" Width="100" VerticalAlignment="Center" FontWeight="Bold" Margin="20 0" FontSize="20"/>
@@ -56,7 +56,7 @@
         </ToggleButton>
         <ToggleButton 
             Command="{Binding NaviSearch}"
-            IsChecked="{Binding IsSearchBtnChecked}" Grid.Row="1" Margin="0 0 30 20">
+            IsChecked="{Binding IsSearchBtnChecked}" Grid.Row="1" Margin="20 0 30 20">
             <StackPanel  Orientation="Horizontal" Margin="5 3" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Path Stretch="Uniform" Fill="Black" Data="{StaticResource searchicon}"/>
                 <TextBlock Text="Search" TextAlignment="Left" Width="100" VerticalAlignment="Center" FontWeight="Bold" Margin="20 0" FontSize="20"/>

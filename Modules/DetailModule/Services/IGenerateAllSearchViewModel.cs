@@ -1,17 +1,16 @@
 ﻿using Outlook.WPF.Infrastructure.WPF.Contract.ViewModels;
-using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Outlook.WPF.Infrastructure.Event
+namespace DetailModule.Services
 {
-    //public class TickerSymbolSelectedEvent : PubSubEvent<PlayingTrackModel> 
-    //{
+    public interface IGenerateAllSearchViewModel
+    {
 
+        Task<AllSeachViewModel> GenerateAllSeachAsync(string searchText);
 
-
-    //}
+    }
 }

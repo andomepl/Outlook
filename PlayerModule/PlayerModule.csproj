@@ -15,4 +15,7 @@
   <ItemGroup>
     <Resource Include="Assets\images.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\" />
+  </ItemGroup>
 </Project>

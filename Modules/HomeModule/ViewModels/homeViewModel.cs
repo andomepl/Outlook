@@ -65,7 +65,8 @@ namespace HomeModule.ViewModels
 
         private void naviSearch()
         {
-            _regionManager.RequestNavigate(RegionNames.DetailRegion, "DefaultSearchView");
+           
+            _regionManager.RequestNavigate(RegionNames.DetailRegion, "SearchDetail");
         }
 
     }

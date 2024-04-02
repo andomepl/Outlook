@@ -7,30 +7,11 @@ using System.Threading.Tasks;
 
 namespace Outlook.WPF.Infrastructure.WPF.Contract.ViewModels
 {
-    public class ArtistsModel:BindableBase
+    public class ArtistsModel
     {
+        public string? ImageUri { get; set; }
 
-        private string imageUri;
-
-        public string ImageUri
-        {
-            get => imageUri;
-            set
-            {
-                SetProperty(ref imageUri, value);
-            }
-        }
-
-        private string name;
-
-        public string Name
-        {
-            get => name;
-            set
-            {
-                SetProperty(ref name, value);
-            }
-        }
+        public string? Name { get; set; }
 
     }
 }
