@@ -2,6 +2,7 @@
 using Outlook.WPF.Infrastructure;
 using Outlook.WPF.Infrastructure.WPF.Contract.ViewModels;
 using Outlook.WPF.SpotifyAPI.ApiServices.SearchItem;
+using Outlook.WPF.SpotifyAPI.Network;
 using Outlook.WPF.SpotifyAPI.Network.Request;
 using Outlook.WPF.SpotifyAPI.Network.Response;
 using System;
@@ -32,9 +33,16 @@ namespace DetailModule.Services
                 if (sp == null)
                     return;
 
-                
 
-                var srcSongs=sp.Tracks.Items.Take(5);
+
+                TopResultModel topResultModel = new TopResultModel()
+                {
+                    ImageUri = sp.Tracks.Items.First().Album.Images[0].Url,
+                    Name=sp.Tracks.Items.First().Name,
+                    Type = sp.Tracks.Items.First().Type,
+                };
+
+                var srcSongs=sp.Tracks.Items.Skip(1).Take(4);
 
                 ObservableCollection<TracksModel> songsModels = new ObservableCollection<TracksModel>(srcSongs.Select(s =>
                     {
@@ -79,7 +87,7 @@ namespace DetailModule.Services
                         }
                     ));
 
-
+                allSeachViewModel.TopResultModel = topResultModel;
                 allSeachViewModel.Songs = songsModels;
                 allSeachViewModel.Artists = artistsModels;
                 allSeachViewModel.PlayLists= playListsModels;

@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.ObjectPool;
 using Outlook.WPF.SpotifyAPI.ApiServices;
 using System;
 using System.Collections.Generic;
@@ -19,9 +21,17 @@ namespace Outlook.WPF.Infrastructure
 
             IServiceCollection serviceCollection = new ServiceCollection();
 
+
+            serviceCollection.TryAddSingleton<ObjectPoolProvider, DefaultObjectPoolProvider>();
+            
+            
             serviceCollection.AddSpotifyServices();
 
+
             serviceProvider = serviceCollection.BuildServiceProvider();
+
+
+
 
         }
 

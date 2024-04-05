@@ -1,0 +1,81 @@
+﻿<UserControl 
+            x:Class="DetailModule.Views.SearchChrome"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:local="clr-namespace:DetailModule.Views"
+            xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+            xmlns:uc="clr-namespace:DetailModule.Controls"
+            xmlns:prism="http://prismlibrary.com/"
+            xmlns:contracts="clr-namespace:Outlook.WPF.Infrastructure.WPF.Contract.ViewModels;assembly=Outlook.WPF.Infrastructure"
+            xmlns:qt="clr-namespace:Outlook.WPF.SpotifyAPI.Network;assembly=Outlook.WPF.SpotifyAPI"
+            prism:ViewModelLocator.AutoWireViewModel="True"
+            xmlns:converter="clr-namespace:DetailModule.Converter"
+            mc:Ignorable="d" 
+            d:DesignHeight="550" d:DesignWidth="500">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/DetailModule;component/Assets/interfaceicon.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/DetailModule;component/Assets/DetailChangedDataTemplates.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Border Margin="10" Background="{x:Null}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox 
+                    Grid.Column="0"
+                    Width="250" 
+                    Height="40" 
+                    Margin="30 0"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center" 
+                    Foreground="White" 
+                    BorderThickness="1.5" 
+                    Background="#242424" 
+                    Style="{StaticResource PlaceHolderTextBox}">
+                    <TextBox.Resources>
+                        <converter:SearchTextBoxConverter x:Key="SearchTextBox"/>
+                    </TextBox.Resources>
+                    <TextBox.Text>
+                        <MultiBinding UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource SearchTextBox}">
+                            <Binding Path="FullsearchText"/>
+                            <Binding Path="IsHavingSearchingText" Mode="OneWayToSource"/>
+                        </MultiBinding>
+                    </TextBox.Text>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding SearchCommand}" CommandParameter="{Binding FullsearchText}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+                <StackPanel 
+                    Margin="10 3"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal" Grid.Column="1">
+                    <uc:MessageButton  
+                        Margin="10 0"
+                            ImageBtnSource="{Binding AccountGroupPngPath}">
+                    </uc:MessageButton>
+                    <uc:MessageButton
+                        Margin="10 0"
+                            ImageBtnSource="{Binding ProfilePngPath}">
+                    </uc:MessageButton>
+                </StackPanel>
+            </Grid>
+
+            <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" />
+        </Grid>
+    </Border>
+</UserControl>

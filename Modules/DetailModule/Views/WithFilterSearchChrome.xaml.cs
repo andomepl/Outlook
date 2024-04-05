@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace DetailModule.Views
 {
     /// <summary>
-    /// Interaction logic for ArtistsDisplay.xaml
+    /// Interaction logic for WithFilterSearchChrome.xaml
     /// </summary>
-    public partial class ArtistsDisplay : UserControl
+    public partial class WithFilterSearchChrome : UserControl
     {
-        public ArtistsDisplay()
+        public WithFilterSearchChrome()
         {
             InitializeComponent();
         }

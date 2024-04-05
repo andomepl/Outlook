@@ -3,14 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DetailModule.Views"
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:uc="clr-namespace:DetailModule.Controls"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:contracts="clr-namespace:Outlook.WPF.Infrastructure.WPF.Contract.ViewModels;assembly=Outlook.WPF.Infrastructure"
-             xmlns:qt="clr-namespace:Outlook.WPF.SpotifyAPI.Network;assembly=Outlook.WPF.SpotifyAPI"
-             prism:ViewModelLocator.AutoWireViewModel="True"
-             xmlns:converter="clr-namespace:DetailModule.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="500">
     <UserControl.Resources>
@@ -20,214 +14,111 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
+    
+    <Border  
+        Grid.Row="1"
+        Background="{x:Null}" Margin="10">
+        <ScrollViewer
+            Background="{x:Null}" Foreground="{x:Null}">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="250"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Background="{x:Null}">
+                    <Label Content="Top Result" Margin="10 0 3 5" FontWeight="Bold" FontSize="15" Foreground="White"></Label>
+                    <Button 
+                        Style="{DynamicResource DisplaySearchInfoBtn}" 
+                        Background="#242424" 
+                        BorderThickness="0" 
+                        Width="300" 
+                        HorizontalContentAlignment="Left" 
+                        HorizontalAlignment="Left">
+                        <StackPanel Margin="10 25 0 5">
+                            <Ellipse Stroke="{x:Null}" Width="80" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Ellipse.Fill>
+                                    <ImageBrush        
+                                        Viewport="0,0,1,1"
+                                        ViewportUnits="RelativeToBoundingBox" 
+                                        Stretch="Uniform" 
+                                        ImageSource="{Binding ViewModel.TopResultModel.ImageUri}"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBlock FontSize="20" FontWeight="Bold" Foreground="White" Margin="5 15 3 5" Text="{Binding ViewModel.TopResultModel.Name}"/>
+                            <TextBlock Margin="5 5" Foreground="DimGray" Text="{Binding ViewModel.TopResultModel.Type}"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Background="{x:Null}">
+                    <Label 
+                        Content="Songs" 
+                        Margin="10 0 3 5" 
+                        FontWeight="Bold" 
+                        FontSize="15" 
+                        Foreground="White"/>
+                    <ListView 
+                        BorderThickness="0"
+                        Background="{x:Null}" 
+                        Margin="10 0 3 5" ItemsSource="{Binding ViewModel.Songs}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate DataType="{x:Type contracts:TracksModel}">
+                                <DockPanel 
+                                        Margin="10 5"
+                                        LastChildFill="True">
+                                    <Rectangle 
+                                            DockPanel.Dock="Left"
+                                            Stroke="{x:Null}" Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Rectangle.Fill>
+                                            <ImageBrush        
+                                                    Viewport="0,0,1,1"
+                                                    ViewportUnits="RelativeToBoundingBox" 
+                                                    Stretch="Uniform" 
+                                                    ImageSource="{Binding ImageUri}"/>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <Grid 
+                                            Margin="10 2 5 2">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" Foreground="White" Text="{Binding Name}"/>
+                                        <TextBlock Grid.Row="1" Foreground="White" Text="{Binding ArtistName}"/>
+                                    </Grid>
+                                    <TextBlock 
+                                            VerticalAlignment="Center"
+                                            DockPanel.Dock="Right"
+                                            HorizontalAlignment="Right" Foreground="White" Text="{Binding Duration}"/>
+                                </DockPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListViewItem">
+                                            <Border x:Name="bd" CornerRadius="5">
+                                                <ContentPresenter/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="bd" Property="Background" Value="#242424"/>
+                                                </Trigger>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter TargetName="bd" Property="Background" Value="#242424"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
 
-    <Border Margin="10" Background="{x:Null}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBox 
-                    Text="{Binding FullsearchText, UpdateSourceTrigger=PropertyChanged}"   
-                    Grid.Column="0"
-                    Width="250" 
-                    Height="40" 
-                    Margin="30 0"
-                    HorizontalAlignment="Left"
-                    VerticalContentAlignment="Center" 
-                    Foreground="White" 
-                    BorderThickness="1.5" 
-                    Background="#242424" 
-                    Style="{StaticResource PlaceHolderTextBox}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="KeyUp">
-                            <i:InvokeCommandAction Command="{Binding SearchImplCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TextBox>
-                <StackPanel 
-                    Margin="10 3"
-                    HorizontalAlignment="Right"
-                    Orientation="Horizontal" Grid.Column="1">
-                    <uc:MessageButton  
-                        Margin="10 0"
-                            ImageBtnSource="{Binding AccountGroupPngPath}">
-                    </uc:MessageButton>
-                    <uc:MessageButton
-                        Margin="10 0"
-                            ImageBtnSource="{Binding ProfilePngPath}">
-                    </uc:MessageButton>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
                 </StackPanel>
             </Grid>
-
-            <StackPanel 
-                Grid.Row="1"
-                Orientation="Horizontal">
-                <StackPanel.Resources>
-                    <converter:FilterToIsChecked x:Key="FilterIsCheckedConverter"/>
-                </StackPanel.Resources>
-                <ToggleButton 
-                    IsChecked="{Binding CurrentFilter,Converter={StaticResource FilterIsCheckedConverter}, ConverterParameter=All}" 
-                    Style="{StaticResource filterButton}" 
-                    Content="All">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Checked">
-                            <i:InvokeCommandAction Command="{Binding SearchImplCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </ToggleButton>
-                <ToggleButton 
-                    IsChecked="{Binding CurrentFilter, Converter={StaticResource FilterIsCheckedConverter}, ConverterParameter=track}"
-                    Style="{StaticResource filterButton}" 
-                    Content="Songs">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Checked">
-                            <i:InvokeCommandAction Command="{Binding SearchImplCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </ToggleButton>
-                <ToggleButton 
-                    IsChecked="{Binding CurrentFilter,Converter={StaticResource FilterIsCheckedConverter}, ConverterParameter=playlist}"
-                    Style="{StaticResource filterButton}" 
-                    Content="Playlists">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Checked">
-                            <i:InvokeCommandAction Command="{Binding SearchImplCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </ToggleButton>
-                <ToggleButton 
-                    IsChecked="{Binding CurrentFilter, Converter={StaticResource FilterIsCheckedConverter}, ConverterParameter=album}"
-                    Style="{StaticResource filterButton}" 
-                    Content="Albums">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Checked">
-                            <i:InvokeCommandAction Command="{Binding SearchImplCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </ToggleButton>
-                <ToggleButton 
-                    IsChecked="{Binding CurrentFilter, Converter={StaticResource FilterIsCheckedConverter}, ConverterParameter=artist}"
-                    Style="{StaticResource filterButton}" 
-                    Content="Artists">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Checked">
-                            <i:InvokeCommandAction Command="{Binding SearchImplCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </ToggleButton>
-            </StackPanel>
-
-            <ContentControl></ContentControl>
-            <Border  Background="{x:Null}" Grid.Row="2" Margin="10">
-                <ScrollViewer
-                    Background="{x:Null}" Foreground="{x:Null}">
-                    <Grid Margin="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="250"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Background="{x:Null}">
-                            <Label Content="Top Result" Margin="10 0 3 5" FontWeight="Bold" FontSize="15" Foreground="White"></Label>
-                            <Button 
-                                Style="{DynamicResource DisplaySearchInfoBtn}" 
-                                Background="#242424" 
-                                BorderThickness="0" 
-                                Width="300" 
-                                HorizontalContentAlignment="Left" 
-                                HorizontalAlignment="Left">
-                                <StackPanel Margin="10 25 0 5">
-                                    <Ellipse Stroke="{x:Null}" Width="80" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <Ellipse.Fill>
-                                            <ImageBrush        
-                                                Viewport="0,0,1,1"
-                                                ViewportUnits="RelativeToBoundingBox" 
-                                                Stretch="Uniform" 
-                                                ImageSource="{Binding FullSearchResponse.Tracks.ImageUri}"/>
-                                        </Ellipse.Fill>
-                                    </Ellipse>
-                                    <TextBlock FontSize="20" FontWeight="Bold" Foreground="White" Margin="5 15 3 5" Text="{Binding FullSearchResponse.Tracks.Name}"/>
-                                    <TextBlock Margin="5 5" Foreground="DimGray" Text="{Binding FullSearchResponse.Tracks.DisplayType}"/>
-                                </StackPanel>
-                            </Button>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Background="{x:Null}">
-                            <Label 
-                                Content="Songs" 
-                                Margin="10 0 3 5" 
-                                FontWeight="Bold" 
-                                FontSize="15" 
-                                Foreground="White"/>
-                            <ListView 
-                                BorderThickness="0"
-                                Background="{x:Null}" 
-                                Margin="10 0 3 5" ItemsSource="{Binding AllSearchViewModel.Songs}">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate DataType="{x:Type contracts:TracksModel}">
-                                        <DockPanel 
-                                                Margin="10 5"
-                                                LastChildFill="True">
-                                                <Rectangle 
-                                                    DockPanel.Dock="Left"
-                                                    Stroke="{x:Null}" Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                    <Rectangle.Fill>
-                                                        <ImageBrush        
-                                                            Viewport="0,0,1,1"
-                                                            ViewportUnits="RelativeToBoundingBox" 
-                                                            Stretch="Uniform" 
-                                                            ImageSource="{Binding ImageUri}"/>
-                                                    </Rectangle.Fill>
-                                                </Rectangle>
-                                                <Grid 
-                                                    Margin="10 2 5 2">
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="*"/>
-                                                        <RowDefinition Height="*"/>
-                                                    </Grid.RowDefinitions>
-                                                    <TextBlock Grid.Row="0" Foreground="White" Text="{Binding Name}"/>
-                                                    <TextBlock Grid.Row="1" Foreground="White" Text="{Binding Artists.Name}"/>
-                                                </Grid>
-                                                <TextBlock 
-                                                    VerticalAlignment="Center"
-                                                    DockPanel.Dock="Right"
-                                                    HorizontalAlignment="Right" Foreground="White" Text="{Binding Duration}"/>
-                                            </DockPanel>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="ListViewItem">
-                                                    <Border x:Name="bd" CornerRadius="5">
-                                                        <ContentPresenter/>
-                                                    </Border>
-                                                    <ControlTemplate.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter TargetName="bd" Property="Background" Value="#242424"/>
-                                                        </Trigger>
-                                                        <Trigger Property="IsSelected" Value="True">
-                                                            <Setter TargetName="bd" Property="Background" Value="#242424"/>
-                                                        </Trigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                                
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                            </ListView>
-                        </StackPanel>
-                    </Grid>
-                </ScrollViewer>
-            </Border>
-        </Grid>
+        </ScrollViewer>
     </Border>
+
 
 </UserControl>

@@ -36,6 +36,10 @@ namespace HomeModule.ViewModels
             NaviHome = new DelegateCommand(naviHome);
 
             NaviSearch = new DelegateCommand(naviSearch);
+
+
+            
+
         }
 
 
@@ -66,7 +70,7 @@ namespace HomeModule.ViewModels
         private void naviSearch()
         {
            
-            _regionManager.RequestNavigate(RegionNames.DetailRegion, "SearchDetail");
+            _regionManager.RequestNavigate(RegionNames.DetailRegion, "SearchChrome");
         }
 
     }
