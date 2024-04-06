@@ -60,7 +60,7 @@ namespace DetailModule.ViewModels
 
         public async void Search(string s)
         {
-            ViewModel = await s_generateAllSearchViewModel.GenerateAllSeachAsync(s).ConfigureAwait(false);
+            ViewModel = await s_generateAllSearchViewModel.Generate(s).ConfigureAwait(false);
         }
 
         public void Clear()

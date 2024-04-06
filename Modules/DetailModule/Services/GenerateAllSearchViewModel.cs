@@ -16,7 +16,7 @@ namespace DetailModule.Services
 {
     public class GenerateAllSearchViewModel : IGenerateAllSearchViewModel
     {
-        public async Task<AllSeachViewModel> GenerateAllSeachAsync(string searchText)
+        public async Task<AllSeachViewModel> Generate(string searchText)
         {
 
             AllSeachViewModel allSeachViewModel = new AllSeachViewModel();
@@ -87,10 +87,25 @@ namespace DetailModule.Services
                         }
                     ));
 
+                var albums = sp.Albums.Items.Take(5);
+                ObservableCollection<AlbumModel> albumModels = new ObservableCollection<AlbumModel>(albums.Select(
+                        a =>
+                        {
+                            return new AlbumModel
+                            {
+                                ImageUri = a.Images[0].Url,
+                                Name = a.Name,
+                                ReleaseDate = a.ReleaseDate,
+                                ArtistName = a.Artists[0].Name
+                            };
+                        }
+                    ));
+
                 allSeachViewModel.TopResultModel = topResultModel;
                 allSeachViewModel.Songs = songsModels;
                 allSeachViewModel.Artists = artistsModels;
                 allSeachViewModel.PlayLists= playListsModels;
+                allSeachViewModel.Albums= albumModels;
 
 
                 return;

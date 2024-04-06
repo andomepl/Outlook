@@ -55,5 +55,16 @@ namespace Outlook.WPF.Infrastructure.WPF.Contract.ViewModels
             }
         }
 
+        private ObservableCollection<AlbumModel> albums;
+
+        public ObservableCollection<AlbumModel> Albums
+        {
+            get => albums;
+            set
+            {
+                SetProperty(ref albums, value);
+            }
+        }
+
     }
 }

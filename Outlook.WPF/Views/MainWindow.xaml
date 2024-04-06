@@ -13,7 +13,7 @@
         Background="Transparent"
         Icon="../Assets/icons/dog.png"   
         Height="920" 
-        Width="1300">
+        Width="1375">
     
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static SystemCommands.CloseWindowCommand}" Executed="CloseCommand" CanExecute="CanCloseCommand"/>
@@ -42,9 +42,9 @@
                 </Style>
             </Grid.Resources>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.5*"/>
                 <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="7*"/>
             </Grid.ColumnDefinitions>
             <Grid Margin="15 0 5 10">
                 <Grid.RowDefinitions>

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Outlook.WPF.SpotifyAPI.ApiServices.SearchItem
 {
@@ -27,7 +28,9 @@ namespace Outlook.WPF.SpotifyAPI.ApiServices.SearchItem
         {
             StringBuilder sb=new StringBuilder(defaultEndpoint);
 
-            sb.Append($"q={s.QuerySearch}");
+            var precdentCoding= HttpUtility.UrlEncode(s.QuerySearch);
+
+            sb.Append($"q={precdentCoding}");
 
             sb.Append($"&type={s.QueryType.ToString().Replace(", " , ",")}");
 

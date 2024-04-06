@@ -59,9 +59,10 @@ namespace Outlook.WPF.SpotifyAPI.Network
             {
 
                 HttpResponseMessage response = await httpClient.GetAsync(uri, cancelToken);
-                string entity = await response.Content.ReadAsStringAsync();
+                string entityString = await response.Content.ReadAsStringAsync();
 
-                return JsonConvert.DeserializeObject<T>(entity);
+                T? entity=JsonConvert.DeserializeObject<T>(entityString);
+                return entity;
             }
 
             catch(OperationCanceledException e)

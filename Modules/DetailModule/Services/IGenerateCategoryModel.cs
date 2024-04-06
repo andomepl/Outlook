@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace DetailModule.Services
 {
-    public interface IGenerateAllSearchViewModel
+    public interface IGenerateCategoryModel
     {
 
-        Task<AllSeachViewModel> Generate(string searchText);
-
+        Task<List<CategoryModel>> Generate();
     }
 }

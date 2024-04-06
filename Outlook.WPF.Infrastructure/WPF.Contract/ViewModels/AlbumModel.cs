@@ -18,7 +18,7 @@ namespace Outlook.WPF.Infrastructure.WPF.Contract.ViewModels
         public string? Name { get; set; }
 
 
-
+        public string? ArtistName { get; set; }
 
     }
 }

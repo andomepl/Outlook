@@ -1,13 +1,17 @@
-﻿using DetailModule.ViewModels.Interface;
+﻿using DetailModule.Services;
+using DetailModule.ViewModels.Interface;
+using Outlook.WPF.Infrastructure.WPF.Contract.ViewModels;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace DetailModule.ViewModels
@@ -38,6 +42,14 @@ namespace DetailModule.ViewModels
         public string ProfilePngPath
         {
             get => profilePngPath;
+        }
+
+
+
+        public List<CategoryModel> CategoryModels 
+        {
+            get;
+            set;
         }
 
 
@@ -80,17 +92,26 @@ namespace DetailModule.ViewModels
         private void ClearSearch()
         {
             FullsearchText = "";
+            IsHavingSearchingText = false;
         }
+
+        private readonly IGenerateCategoryModel s_generateCategoryModel = new GenerateCategoryModel();
 
         public SearchChromeViewModel()
         {
 
             CurrentViewModel = this;
             ClearSearchCommand = new DelegateCommand(ClearSearch);
-
             SearchCommand = new DelegateCommand<string>(Search);
 
-
+            try
+            {
+                CategoryModels = s_generateCategoryModel.Generate().Result;
+            }
+            catch
+            {
+                MessageBox.Show("Category Error");
+            }
         }
 
         public DelegateCommand<string> SearchCommand { get; }
@@ -99,6 +120,7 @@ namespace DetailModule.ViewModels
         {
             if (searchText == null)
                 return;
+
             if(CurrentViewModel is IFilterViewModeSearch ifilter)
             {
                 ifilter.Search(searchText);
@@ -107,9 +129,10 @@ namespace DetailModule.ViewModels
         }
 
 
-        public void OnNavigatedTo(NavigationContext navigationContext)
+        public async void OnNavigatedTo(NavigationContext navigationContext)
         {
             CurrentViewModel = this;
+
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

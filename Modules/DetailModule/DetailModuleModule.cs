@@ -31,11 +31,9 @@ namespace DetailModule
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
 
-            containerRegistry.RegisterSingleton<IGenerateAllSearchViewModel,GenerateAllSearchViewModel>();
+            //containerRegistry.RegisterSingleton<IGenerateAllSearchViewModel,GenerateAllSearchViewModel>();
 
-
-            containerRegistry.RegisterSingleton<AllSearchDetailViewModel>();
-            containerRegistry.RegisterSingleton<WithFilterSearchChromeViewModel>();
+            //containerRegistry.RegisterSingleton<IGenerateCategoryModel,GenerateCategoryModel>();
 
 
         }
