@@ -47,11 +47,11 @@ namespace DetailModule.ViewModels
             return _instance;
         }
 
-        private string mantainerSearch;
+        private string maintainerSearch;
 
         public void Search(string s)
         {
-            mantainerSearch = s;
+            maintainerSearch = s;
             Clear();
             (CurrentViewModel as IFilterViewModeSearch).Search(s);
         }
@@ -71,12 +71,27 @@ namespace DetailModule.ViewModels
                 case "All":
                     (CurrentViewModel as IClear).Clear();
                     CurrentViewModel = AllSearchDetailViewModel.Get();
-                    (CurrentViewModel as IFilterViewModeSearch).Search(mantainerSearch);
+                    (CurrentViewModel as IFilterViewModeSearch).Search(maintainerSearch);
                     break;
                 case "artist":
                     (CurrentViewModel as IClear).Clear();
                     CurrentViewModel = ArtistsSearchDetailViewModel.Get();
-                    (CurrentViewModel as IFilterViewModeSearch).Search(mantainerSearch);
+                    (CurrentViewModel as IFilterViewModeSearch).Search(maintainerSearch);
+                    break;
+                case "album":
+                    (CurrentViewModel as IClear).Clear();
+                    CurrentViewModel = AlbumSearchDetailViewModel.Get();
+                    (CurrentViewModel as IFilterViewModeSearch).Search(maintainerSearch);
+                    break;
+                case "playlist":
+                    (CurrentViewModel as IClear).Clear();
+                    CurrentViewModel = PlayListsSearchDetailViewModel.Get();
+                    (CurrentViewModel as IFilterViewModeSearch).Search(maintainerSearch);
+                    break;
+                case "track":
+                    (CurrentViewModel as IClear).Clear();
+                    CurrentViewModel = SongsSearchDetailViewModel.Get();
+                    (CurrentViewModel as IFilterViewModeSearch).Search(maintainerSearch);
                     break;
                 default:
                     break;

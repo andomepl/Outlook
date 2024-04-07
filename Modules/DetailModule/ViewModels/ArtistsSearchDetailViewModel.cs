@@ -1,4 +1,6 @@
-﻿using DetailModule.ViewModels.Interface;
+﻿using DetailModule.Services;
+using DetailModule.Services.interfaces;
+using DetailModule.ViewModels.Interface;
 using Outlook.WPF.Infrastructure.WPF.Contract.ViewModels;
 using Prism.Mvvm;
 using System;
@@ -22,9 +24,9 @@ namespace DetailModule.ViewModels
             return _instance;
         }
 
-        private ArtistsSearchViewModel viewModel;
+        private List<ArtistsModel> viewModel;
 
-        public ArtistsSearchViewModel ViewModel
+        public List<ArtistsModel> ViewModel
         {
             get => viewModel;
             set
@@ -33,14 +35,16 @@ namespace DetailModule.ViewModels
             }
         }
 
+        private readonly IGenerateSearchArtistsModel s_generateSearchArtistsModel = new GenerateSearchArtistsModel();
+
         public ArtistsSearchDetailViewModel()
         {
 
         }
 
-        public void Search(string s)
+        public async void Search(string s)
         {
-            
+            ViewModel = await s_generateSearchArtistsModel.Generate(s);
         }
 
         public void Clear()

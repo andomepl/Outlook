@@ -11,22 +11,22 @@ using System.Threading.Tasks;
 
 namespace DetailModule.ViewModels
 {
-    public class PlayListsSearchDetailViewModel : BindableBase, IFilterViewModeSearch, IClear
+    public class SongsSearchDetailViewModel : BindableBase, IFilterViewModeSearch, IClear
     {
 
-        private static PlayListsSearchDetailViewModel _instance;
+        private static SongsSearchDetailViewModel _instance;
 
-        public static PlayListsSearchDetailViewModel Get()
+        public static SongsSearchDetailViewModel Get()
         {
             if (_instance == null)
-                _instance = new PlayListsSearchDetailViewModel();
+                _instance = new SongsSearchDetailViewModel();
 
             return _instance;
         }
 
-        private List<PlayListsModel> viewModel;
+        private List<TracksModel> viewModel;
 
-        public List<PlayListsModel> ViewModel
+        public List<TracksModel> ViewModel
         {
             get => viewModel;
             set
@@ -35,21 +35,23 @@ namespace DetailModule.ViewModels
             }
         }
 
-        private readonly IGenerateSearchPlayListsModel s_generateSearchPlayListsModel = new GenerateSearchPlayListsModel();
-        public PlayListsSearchDetailViewModel()
+        private readonly IGenerateSearchSongsModel s_generateSearchSongsModel = new GenerateSearchSongsModel();
+
+        public SongsSearchDetailViewModel()
         {
 
         }
+
 
 
         public void Clear()
         {
-            ViewModel = null;
+            viewModel = null;
         }
 
         public async void Search(string s)
         {
-            ViewModel = await s_generateSearchPlayListsModel.Generate(s);
+            ViewModel = await s_generateSearchSongsModel.Generate(s);
         }
     }
 }

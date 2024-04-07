@@ -71,7 +71,13 @@ namespace Outlook.WPF.SpotifyAPI.Network
 
                 return default(T);
             }
-            
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+
+                return default(T);
+            }
+
         }
 
 

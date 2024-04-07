@@ -32,13 +32,42 @@ namespace Outlook.WPF.SpotifyAPI.Network.Request
                 querySearch = value;
             }
         }
+
+        private int limit;
+
+        public int Limit
+        {
+            get => limit;
+            set
+            {
+                limit = value;
+            }
+        }
+
+
+        private int offset;
+
+        public int Offset
+        {
+            get => offset;
+            set
+            {
+                offset = value;
+            }
+        }
+
+
         
-        public SearchRequest(string q,QueryType queryType=QueryType.album|QueryType.track|QueryType.episode|QueryType.show|QueryType.artist|QueryType.playlist)
+        public SearchRequest(string q,QueryType queryType=QueryType.album|QueryType.track|QueryType.episode|QueryType.show|QueryType.artist|QueryType.playlist, int limit=20,int offset=0)
         {
 
             QuerySearch = q;
 
             QueryType = queryType;
+
+            Limit = limit;
+
+            Offset=offset;
 
         }
 

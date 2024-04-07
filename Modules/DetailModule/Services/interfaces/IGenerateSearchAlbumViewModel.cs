@@ -5,12 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DetailModule.Services
+namespace DetailModule.Services.interfaces
 {
-    public interface IGenerateAllSearchViewModel
+    public interface IGenerateSearchAlbumViewModel
     {
 
-        Task<AllSeachViewModel> Generate(string searchText);
-
+        Task<List<AlbumModel>> Generate(string searchText);
     }
 }

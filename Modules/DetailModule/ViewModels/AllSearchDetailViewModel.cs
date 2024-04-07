@@ -1,4 +1,5 @@
 ﻿using DetailModule.Services;
+using DetailModule.Services.interfaces;
 using DetailModule.ViewModels.Interface;
 using Microsoft.Extensions.DependencyInjection;
 using Outlook.WPF.Infrastructure;

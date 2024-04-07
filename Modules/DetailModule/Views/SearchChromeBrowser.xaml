@@ -23,7 +23,6 @@
                           BorderThickness="0" 
                           Background="{x:Null}" 
                           Grid.Row="1" Margin="5" 
-                          
                           ItemsSource="{Binding CategoryModels}">
                     <ListView.Resources>
                         <Style x:Key="categoryListViewItem" TargetType="{x:Type ListViewItem}">
@@ -74,8 +73,8 @@
                         <Style TargetType="{x:Type ListViewItem}">
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
                             <Setter Property="VerticalContentAlignment" Value="Center"/>
-                            <Setter Property="Width" Value="180"/>
-                            <Setter Property="Height" Value="180"/>
+                            <Setter Property="Width" Value="200"/>
+                            <Setter Property="Height" Value="200"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type ListViewItem}">

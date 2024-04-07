@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DetailModule.Services.interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Outlook.WPF.Infrastructure;
 using Outlook.WPF.Infrastructure.WPF.Contract.ViewModels;
 using Outlook.WPF.SpotifyAPI.ApiServices.Category;
@@ -18,6 +19,7 @@ namespace DetailModule.Services
         {
 
             List<CategoryModel> categoryModels = new List<CategoryModel>();
+
             await Task.Run(async() =>
             {
                 var service=DependencyInjection.serviceProvider.GetService<ICategoriesApi>();

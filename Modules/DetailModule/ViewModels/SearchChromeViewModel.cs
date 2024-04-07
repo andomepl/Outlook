@@ -1,4 +1,5 @@
 ﻿using DetailModule.Services;
+using DetailModule.Services.interfaces;
 using DetailModule.ViewModels.Interface;
 using Outlook.WPF.Infrastructure.WPF.Contract.ViewModels;
 using Prism.Commands;

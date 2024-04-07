@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DetailModule.Services
+namespace DetailModule.Services.interfaces
 {
-    public interface IGenerateCategoryModel
+    public interface IGenerateSearchPlayListsModel
     {
-
-        Task<List<CategoryModel>> Generate();
+        Task<List<PlayListsModel>> Generate(string searchText);
     }
 }

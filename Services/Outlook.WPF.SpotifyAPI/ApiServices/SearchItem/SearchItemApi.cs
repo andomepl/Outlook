@@ -34,6 +34,10 @@ namespace Outlook.WPF.SpotifyAPI.ApiServices.SearchItem
 
             sb.Append($"&type={s.QueryType.ToString().Replace(", " , ",")}");
 
+            sb.Append($"&limit={s.Limit}");
+
+            sb.Append($"&offset={s.Offset}");
+
             string endpoint = sb.ToString();
 
 

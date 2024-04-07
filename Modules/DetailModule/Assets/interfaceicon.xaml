@@ -145,6 +145,7 @@
                                            Visibility="Collapsed"/>
                             </Grid>
                             <Button
+                                    Cursor="Arrow"
                                     Command="{Binding ClearSearchCommand}"
                                     Grid.Column="2"
                                     x:Name="closebtn"

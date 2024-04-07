@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DetailModule.Services.interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Outlook.WPF.Infrastructure;
 using Outlook.WPF.Infrastructure.WPF.Contract.ViewModels;
 using Outlook.WPF.SpotifyAPI.ApiServices.SearchItem;
@@ -9,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,7 +35,7 @@ namespace DetailModule.Services
                 if (sp == null)
                     return;
 
-
+                
 
                 TopResultModel topResultModel = new TopResultModel()
                 {
@@ -112,6 +114,24 @@ namespace DetailModule.Services
             });
 
             return allSeachViewModel;
+        }
+
+
+
+        private bool NullCheck(object o)
+        {
+
+            Type type = o.GetType();
+
+            PropertyInfo[] propertyInfos= type.GetProperties(BindingFlags.Public|BindingFlags.Instance);
+
+            foreach(var property in propertyInfos)
+            {
+                return false;
+            }
+
+            return true;
+
         }
     }
 }
